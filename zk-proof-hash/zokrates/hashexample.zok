@@ -1,0 +1,9 @@
+// import "hashes/sha256/512bitPacked" as sha256packed
+
+// def main(public field a, public field b, private field c, private field d) -> field[2]:
+//     field[2] h = sha256packed([a, b, c, d])
+//     return h
+
+def main(private field a, field b):
+  assert(a * a == b)
+  return
