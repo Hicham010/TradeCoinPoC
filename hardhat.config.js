@@ -39,25 +39,32 @@ module.exports = {
       url: "http://127.0.0.1:8545",
     },
     rinkeby: {
-      url: "",
+      url: "https://rinkeby.infura.io/v3/30603f0f2cc845749d06dfc1559be56f",
+      // url: "https://eth-rinkeby.alchemyapi.io/v2/siqDv3HtS8Rfka5jHvor7MazpHj8KFgl",
       accounts: [
-        "", // owner
-        "", // farmer
-        "", // warehouse
-        "", // transporter
-        "", // processor
+        "3e55d582544c0455712429a5d138f97224b359a907d66134ddcba08f69e1944a", // owner
+        "6719bf2b3a0f55692d94a2388214d292ffa2307cb59f82e7afe5cee4db5cb920", // farmer
+        "40db641515cb3961aa3ddd5e62949bad61ec1cc04518427e704bb75759a3be98", // warehouse
+        "49b70739a90d8eda2eed1097d1a9de0c9ad9277c6f87665fd08764dc3dd14103", // transporter
+        "6a716d2cd24a4ecb18d9f05e0debf04ae4a281597d70f6972a83615d3012b7dc", // processor
+      ],
+    },
+    arbitrum_rinkeby: {
+      url: "https://arb-rinkeby.g.alchemy.com/v2/Tj_TXvBmvfohQpqQMrsSkSlCRPh_m9zM",
+      accounts: [
+        "3e55d582544c0455712429a5d138f97224b359a907d66134ddcba08f69e1944a", // owner
       ],
     },
     hardhat: {},
   },
   etherscan: {
-    apiKey: "",
+    apiKey: "AB9S78WN3P8XD19I3YJZ7PRZVUCPWT7A5D",
   },
   gasReporter: {
     enabled: true,
     currency: "EUR",
-    // gasPriceApi: """,
-    gasPrice: 30,
-    coinmarketcap: "",
+    // gasPriceApi: "AB9S78WN3P8XD19I3YJZ7PRZVUCPWT7A5D",
+    gasPrice: 40,
+    coinmarketcap: "1be5bd6b-3a7e-4928-82ab-3c46248bb292",
   },
 };

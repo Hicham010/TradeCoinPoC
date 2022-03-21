@@ -388,82 +388,6 @@ contract TradeCoinCommodity is ERC1155, AccessControl, Pausable {
         _burn(msg.sender, id, amountInGram);
     }
 
-    // function batchTokens(uint256[] memory _Ids)
-    //     public
-    //     onlyRole(WAREHOUSE_ROLE)
-    // {
-    //     //TODO: Implement away to keep track of balances of owners
-    //     //TODO: Create a burn function for tokenIds like in ERC721
-    //     require(_Ids.length > 1, "Can't batch 1 token");
-    //     Commodity memory _commodity0 = dataOf(_Ids[0]);
-    //     require(
-    //         _commodity0.state == CommodityState.Stored ||
-    //             _commodity0.state == CommodityState.Processing ||
-    //             _commodity0.state == CommodityState.Confirmed,
-    //         "This token is not stored or processing"
-    //     );
-    //     require(
-    //         _commodity0.destinationAddress == msg.sender,
-    //         "This token is not in your possession"
-    //     );
-
-    //     uint256 totalWeight = 0;
-    //     address ownerOfIds = ownerOf(_Ids[0]);
-
-    //     totalWeight += balanceOf(msg.sender, _Ids[0]);
-    //     _burn(msg.sender, _Ids[0], totalWeight);
-
-    //     for (uint256 i = 1; i < _Ids.length; i++) {
-    //         // console.log("Inside of for loop", i);
-    //         // console.log("Length of array", _Ids.length);
-    //         Commodity memory _commodityI = dataOf(_Ids[i]);
-    //         require(
-    //             _commodityI.destinationAddress == msg.sender,
-    //             "This token is not in your possession"
-    //         );
-    //         require(
-    //             ownerOfIds == ownerOf(_Ids[i]),
-    //             "Not allowed to batch tokens of different owners"
-    //         );
-    //         require(
-    //             _commodity0.state == _commodityI.state,
-    //             "Commodity states don't match"
-    //         );
-    //         require(
-    //             keccak256(abi.encode(_commodity0.isoList)) ==
-    //                 keccak256(abi.encode(_commodityI.isoList)),
-    //             "Commodities don't the same processes"
-    //         );
-    //         require(
-    //             keccak256(abi.encode(_commodity0.commodityType)) ==
-    //                 keccak256(abi.encode(_commodityI.commodityType)),
-    //             "Commodities aren't of the same type"
-    //         );
-    //         // console.log("After all require");
-    //         uint256 balanceOfI = balanceOf(msg.sender, _Ids[i]);
-    //         totalWeight += balanceOfI;
-    //         _burn(msg.sender, _Ids[i], balanceOfI);
-    //         delete commodityData[i];
-    //     }
-
-    //     Commodity memory _commodityBatch = Commodity(
-    //         _commodity0.state,
-    //         _commodity0.commodityType,
-    //         _commodity0.isoList,
-    //         address(0),
-    //         msg.sender
-    //     );
-
-    //     uint256 tokenIdPlus = tokenId + 1;
-    //     commodityData[tokenIdPlus] = abi.encode(_commodityBatch);
-
-    //     _mint(msg.sender, tokenIdPlus, totalWeight, "");
-    //     tokenId++;
-    //     delete commodityData[_Ids[0]];
-
-    //     //emit Batched;
-    // }
-
     function batchTokens(uint256[] memory _Ids)
         public
         onlyRole(WAREHOUSE_ROLE)
@@ -775,3 +699,79 @@ contract TradeCoinCommodity is ERC1155, AccessControl, Pausable {
         return super.supportsInterface(interfaceId);
     }
 }
+
+// function batchTokens(uint256[] memory _Ids)
+//     public
+//     onlyRole(WAREHOUSE_ROLE)
+// {
+//     //TODO: Implement away to keep track of balances of owners
+//     //TODO: Create a burn function for tokenIds like in ERC721
+//     require(_Ids.length > 1, "Can't batch 1 token");
+//     Commodity memory _commodity0 = dataOf(_Ids[0]);
+//     require(
+//         _commodity0.state == CommodityState.Stored ||
+//             _commodity0.state == CommodityState.Processing ||
+//             _commodity0.state == CommodityState.Confirmed,
+//         "This token is not stored or processing"
+//     );
+//     require(
+//         _commodity0.destinationAddress == msg.sender,
+//         "This token is not in your possession"
+//     );
+
+//     uint256 totalWeight = 0;
+//     address ownerOfIds = ownerOf(_Ids[0]);
+
+//     totalWeight += balanceOf(msg.sender, _Ids[0]);
+//     _burn(msg.sender, _Ids[0], totalWeight);
+
+//     for (uint256 i = 1; i < _Ids.length; i++) {
+//         // console.log("Inside of for loop", i);
+//         // console.log("Length of array", _Ids.length);
+//         Commodity memory _commodityI = dataOf(_Ids[i]);
+//         require(
+//             _commodityI.destinationAddress == msg.sender,
+//             "This token is not in your possession"
+//         );
+//         require(
+//             ownerOfIds == ownerOf(_Ids[i]),
+//             "Not allowed to batch tokens of different owners"
+//         );
+//         require(
+//             _commodity0.state == _commodityI.state,
+//             "Commodity states don't match"
+//         );
+//         require(
+//             keccak256(abi.encode(_commodity0.isoList)) ==
+//                 keccak256(abi.encode(_commodityI.isoList)),
+//             "Commodities don't the same processes"
+//         );
+//         require(
+//             keccak256(abi.encode(_commodity0.commodityType)) ==
+//                 keccak256(abi.encode(_commodityI.commodityType)),
+//             "Commodities aren't of the same type"
+//         );
+//         // console.log("After all require");
+//         uint256 balanceOfI = balanceOf(msg.sender, _Ids[i]);
+//         totalWeight += balanceOfI;
+//         _burn(msg.sender, _Ids[i], balanceOfI);
+//         delete commodityData[i];
+//     }
+
+//     Commodity memory _commodityBatch = Commodity(
+//         _commodity0.state,
+//         _commodity0.commodityType,
+//         _commodity0.isoList,
+//         address(0),
+//         msg.sender
+//     );
+
+//     uint256 tokenIdPlus = tokenId + 1;
+//     commodityData[tokenIdPlus] = abi.encode(_commodityBatch);
+
+//     _mint(msg.sender, tokenIdPlus, totalWeight, "");
+//     tokenId++;
+//     delete commodityData[_Ids[0]];
+
+//     //emit Batched;
+// }
