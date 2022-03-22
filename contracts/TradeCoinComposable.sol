@@ -2,9 +2,9 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
+import "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol";
 
 contract TradeCoinTokenizer is ERC721 {
     using Counters for Counters.Counter;
@@ -34,7 +34,7 @@ contract TradeCoinTokenizer is ERC721 {
 
     constructor() ERC721("TradeCoinTokenizer", "TCT") {}
 
-    mapping(uint256 => CommodityStruct) private Commodity;
+    mapping(uint256 => CommodityStruct) public Commodity;
 
     function safeMint(
         address to,
@@ -82,6 +82,15 @@ contract TradeCoinTokenizer is ERC721 {
         safeTransferFrom(msg.sender, _to, id, _data);
     }
 
+    function dataOf(uint256 _id) public view returns (CommodityStruct memory) {
+        CommodityStruct memory _tradeCoinStruct = Commodity[_id];
+        require(
+            _tradeCoinStruct.pickupAddress != address(0),
+            "Token not received"
+        );
+        return _tradeCoinStruct;
+    }
+
     // modifier onlySetupContract(msg.sender) {
     //     require(msg.sender == SetupAddr)
     // }
@@ -108,6 +117,8 @@ contract TradeCoinSetup is IERC721Receiver {
 
     mapping(uint256 => TradeCoindDR) tradecoindr;
     mapping(uint256 => bool) payedEth;
+
+    mapping(uint256 => bool) blockTokenId;
 
     event saleInitialized(
         uint256 indexed _id,
@@ -164,6 +175,9 @@ contract TradeCoinSetup is IERC721Receiver {
         address _tradeCoinDataAddr
     ) public {
         tradeCoinTokenizerAddr = _tradeCoinTokenizerAddr;
+        tradeCoinRightsAddr = _tradeCoinRightsAddr;
+        tradeCoinDataAddr = _tradeCoinDataAddr;
+        tradeCoinTokenizer = TradeCoinTokenizer(_tradeCoinTokenizerAddr);
         tradeCoinRights = TradeCoinRights(_tradeCoinRightsAddr);
         tradeCoinData = TradeCoinData(_tradeCoinDataAddr);
     }
@@ -225,7 +239,7 @@ contract TradeCoinSetup is IERC721Receiver {
 
     function addProcess(uint256 _id, string memory _process) external {
         require(
-            tradeCoinData.ownerOf(_id) == msg.sender,
+            tradeCoinDataAddr == msg.sender,
             "You are not the owner of this data token"
         );
 
@@ -234,11 +248,27 @@ contract TradeCoinSetup is IERC721Receiver {
 
     function decreaseWeight(uint256 _id, uint256 decreaseAmount) external {
         require(
-            tradeCoinData.ownerOf(_id) == msg.sender,
+            tradeCoinDataAddr == msg.sender,
             "You are not the owner of this data token"
         );
 
         tradeCoinTokenizer.decreaseWeight(_id, decreaseAmount);
+    }
+
+    function blockIdOfToken(uint256 _id, bool _block) external {
+        require(
+            tradeCoinRightsAddr == msg.sender,
+            "You don't own the rights token"
+        );
+        blockTokenId[_id] = _block;
+    }
+
+    modifier isBlocked(uint256 _id) {
+        require(
+            !blockTokenId[_id],
+            "The owner has blocked wrights to this token"
+        );
+        _;
     }
 }
 
@@ -424,6 +454,7 @@ contract TradeCoinSale is IERC721Receiver {
         payable(_tradeCoinSaleData.seller).transfer(
             _tradeCoinSaleData.priceInWei
         );
+
         emit WithdrawPayment(msg.sender, _id);
     }
 
