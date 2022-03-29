@@ -3,6 +3,7 @@ require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-solhint");
 require("hardhat-gas-reporter");
 require("solidity-coverage");
+require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
 // https://hardhat.org/guides/create-task.html
@@ -39,7 +40,7 @@ module.exports = {
       url: "http://127.0.0.1:8545",
     },
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/30603f0f2cc845749d06dfc1559be56f",
+      url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY,
       // url: "https://eth-rinkeby.alchemyapi.io/v2/siqDv3HtS8Rfka5jHvor7MazpHj8KFgl",
       accounts: [
         "3e55d582544c0455712429a5d138f97224b359a907d66134ddcba08f69e1944a", // owner
@@ -50,7 +51,8 @@ module.exports = {
       ],
     },
     arbitrum_rinkeby: {
-      url: "https://arb-rinkeby.g.alchemy.com/v2/Tj_TXvBmvfohQpqQMrsSkSlCRPh_m9zM",
+      url:
+        "https://arb-rinkeby.g.alchemy.com/v2/" + process.env.ALCHEMY_API_KEY,
       accounts: [
         "3e55d582544c0455712429a5d138f97224b359a907d66134ddcba08f69e1944a", // owner
       ],
@@ -58,13 +60,13 @@ module.exports = {
     hardhat: {},
   },
   etherscan: {
-    apiKey: "AB9S78WN3P8XD19I3YJZ7PRZVUCPWT7A5D",
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
   gasReporter: {
     enabled: true,
     currency: "EUR",
     // gasPriceApi: "AB9S78WN3P8XD19I3YJZ7PRZVUCPWT7A5D",
     gasPrice: 40,
-    coinmarketcap: "1be5bd6b-3a7e-4928-82ab-3c46248bb292",
+    coinmarketcap: process.env.COIN_MCAP_API_KEY,
   },
 };

@@ -13,6 +13,12 @@
     "solhint": "^3.3.7"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "^4.5.0"
+    "@openzeppelin/contracts": "^4.5.0",
+    "circom_tester": "^0.0.10",
+    "circomlib": "^2.0.3",
+    "circomlibjs": "^0.1.2",
+    "dotenv": "^16.0.0",
+    "hardhat-circom": "^3.0.1",
+    "mocha": "^9.2.2"
   }
 }
