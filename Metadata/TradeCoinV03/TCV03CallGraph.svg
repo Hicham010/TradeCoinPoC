@@ -1,0 +1,437 @@
+<?xml version="1.0" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="552pt" height="2060pt" viewBox="0.00 0.00 552.20 2060.00">
+<g id="graph0" class="graph" transform="translate(9.03585904144569,2023.3810079674095) scale(0.970259805765541)" data-name="G">
+
+<polygon fill="#2e3e56" stroke="transparent" points="-4,4 -4,-2056 548.2,-2056 548.2,4 -4,4" style=""/>
+<g id="clust1" class="cluster" data-name="clusterNutsNFT3">
+
+<path fill="#445773" stroke="#445773" d="M20,-348C20,-348 524.2,-348 524.2,-348 530.2,-348 536.2,-354 536.2,-360 536.2,-360 536.2,-1895 536.2,-1895 536.2,-1901 530.2,-1907 524.2,-1907 524.2,-1907 20,-1907 20,-1907 14,-1907 8,-1901 8,-1895 8,-1895 8,-360 8,-360 8,-354 14,-348 20,-348" style=""/>
+<text text-anchor="middle" x="272.1" y="-1890.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">NutsNFT3</text>
+</g>
+<g id="clust2" class="cluster" data-name="clusterERC721">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M322.25,-263C322.25,-263 404.96,-263 404.96,-263 410.96,-263 416.96,-269 416.96,-275 416.96,-275 416.96,-328 416.96,-328 416.96,-334 410.96,-340 404.96,-340 404.96,-340 322.25,-340 322.25,-340 316.25,-340 310.25,-334 310.25,-328 310.25,-328 310.25,-275 310.25,-275 310.25,-269 316.25,-263 322.25,-263" style=""/>
+<text text-anchor="middle" x="363.6" y="-323.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">ERC721</text>
+</g>
+<g id="clust3" class="cluster" data-name="clusterconsole">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M340.6,-178C340.6,-178 386.6,-178 386.6,-178 392.6,-178 398.6,-184 398.6,-190 398.6,-190 398.6,-243 398.6,-243 398.6,-249 392.6,-255 386.6,-255 386.6,-255 340.6,-255 340.6,-255 334.6,-255 328.6,-249 328.6,-243 328.6,-243 328.6,-190 328.6,-190 328.6,-184 334.6,-178 340.6,-178" style=""/>
+<text text-anchor="middle" x="363.6" y="-238.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">console</text>
+</g>
+<g id="clust4" class="cluster" data-name="clusterweight">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M325.45,-93C325.45,-93 401.76,-93 401.76,-93 407.76,-93 413.76,-99 413.76,-105 413.76,-105 413.76,-158 413.76,-158 413.76,-164 407.76,-170 401.76,-170 401.76,-170 325.45,-170 325.45,-170 319.45,-170 313.45,-164 313.45,-158 313.45,-158 313.45,-105 313.45,-105 313.45,-99 319.45,-93 325.45,-93" style=""/>
+<text text-anchor="middle" x="363.6" y="-153.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">weight</text>
+</g>
+<g id="clust5" class="cluster" data-name="cluster_weightGram">
+
+<path fill="#3b4b63" stroke="#e8726d" stroke-dasharray="5,2" d="M325.45,-8C325.45,-8 401.76,-8 401.76,-8 407.76,-8 413.76,-14 413.76,-20 413.76,-20 413.76,-73 413.76,-73 413.76,-79 407.76,-85 401.76,-85 401.76,-85 325.45,-85 325.45,-85 319.45,-85 313.45,-79 313.45,-73 313.45,-73 313.45,-20 313.45,-20 313.45,-14 319.45,-8 325.45,-8" style=""/>
+<text text-anchor="middle" x="363.6" y="-68.4" font-family="Times,serif" font-size="14.00" fill="#f0f0f0" style="">_weightGram</text>
+</g>
+<g id="clust6" class="cluster" data-name="cluster_01">
+
+<polygon fill="#2e3e56" stroke="black" points="68.08,-1915 68.08,-2044 398.6,-2044 398.6,-1915 68.08,-1915" style=""/>
+<text text-anchor="middle" x="233.34" y="-2027.4" font-family="Times,serif" font-size="14.00" style="">Legend</text>
+</g>
+<!-- NutsNFT3.onlyApprovedProcessor -->
+<g id="node1" class="node" pointer-events="visible" data-name="NutsNFT3.onlyApprovedProcessor">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="254,-1844.54 254,-1859.46 187.85,-1870 94.31,-1870 28.16,-1859.46 28.16,-1844.54 94.31,-1834 187.85,-1834 254,-1844.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="258,-1841.13 258,-1862.87 188.17,-1874 93.99,-1874 24.16,-1862.87 24.16,-1841.13 93.99,-1830 188.17,-1830 258,-1841.13" style=""/>
+<text text-anchor="middle" x="141.08" y="-1847.8" font-family="Times,serif" font-size="14.00" style="">onlyApprovedProcessor</text>
+</g>
+<!-- NutsNFT3.onlyApprovedTransporter -->
+<g id="node2" class="node" pointer-events="visible" data-name="NutsNFT3.onlyApprovedTransporter">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="262.24,-1782.54 262.24,-1797.46 191.26,-1808 90.89,-1808 19.92,-1797.46 19.92,-1782.54 90.89,-1772 191.26,-1772 262.24,-1782.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="266.24,-1779.09 266.24,-1800.91 191.56,-1812 90.6,-1812 15.92,-1800.91 15.92,-1779.09 90.6,-1768 191.56,-1768 266.24,-1779.09" style=""/>
+<text text-anchor="middle" x="141.08" y="-1785.8" font-family="Times,serif" font-size="14.00" style="">onlyApprovedTransporter</text>
+</g>
+<!-- NutsNFT3.onlyApprovedWarehouse -->
+<g id="node3" class="node" pointer-events="visible" data-name="NutsNFT3.onlyApprovedWarehouse">
+
+<polygon fill="#edad56" stroke="#1bc6a6" stroke-width="3" points="260.26,-1720.54 260.26,-1735.46 190.44,-1746 91.71,-1746 21.9,-1735.46 21.9,-1720.54 91.71,-1710 190.44,-1710 260.26,-1720.54" style=""/>
+<polygon fill="none" stroke="#1bc6a6" stroke-width="3" points="264.25,-1717.1 264.25,-1738.9 190.74,-1750 91.41,-1750 17.91,-1738.9 17.91,-1717.1 91.41,-1706 190.74,-1706 264.25,-1717.1" style=""/>
+<text text-anchor="middle" x="141.08" y="-1723.8" font-family="Times,serif" font-size="14.00" style="">onlyApprovedWarehouse</text>
+</g>
+<!-- NutsNFT3.&lt;Constructor&gt; -->
+<g id="node4" class="node" pointer-events="visible" data-name="NutsNFT3.&lt;Constructor&gt;">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-1670" rx="67.54" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1665.8" font-family="Times,serif" font-size="14.00" style="">&lt;Constructor&gt;</text>
+</g>
+<!-- NutsNFT3.mintNut -->
+<g id="node5" class="node" pointer-events="visible" data-name="NutsNFT3.mintNut">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="363.6" cy="-1103" rx="43.46" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1098.8" font-family="Times,serif" font-size="14.00" style="">mintNut</text>
+</g>
+<!-- NutsNFT3._mint -->
+<g id="node30" class="node" pointer-events="visible" data-name="NutsNFT3._mint">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="494.62" cy="-1103" rx="33.65" ry="18" style=""/>
+<text text-anchor="middle" x="494.62" y="-1098.8" font-family="Times,serif" font-size="14.00" style="">_mint</text>
+</g>
+<!-- NutsNFT3.mintNut&#45;&gt;NutsNFT3._mint -->
+<g id="edge1" class="edge" data-name="NutsNFT3.mintNut-&gt;NutsNFT3._mint">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M406.85,-1103C420.79,-1103 436.31,-1103 450.32,-1103" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="450.7,-1106.5 460.7,-1103 450.7,-1099.5 450.7,-1106.5" style=""/>
+</g>
+<!-- NutsNFT3.approveNut -->
+<g id="node6" class="node" pointer-events="visible" data-name="NutsNFT3.approveNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1454" rx="56.74" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1449.8" font-family="Times,serif" font-size="14.00" style="">approveNut</text>
+</g>
+<!-- NutsNFT3.approve -->
+<g id="node31" class="node" pointer-events="visible" data-name="NutsNFT3.approve">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-1454" rx="42.28" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1449.8" font-family="Times,serif" font-size="14.00" style="">approve</text>
+</g>
+<!-- NutsNFT3.approveNut&#45;&gt;NutsNFT3.approve -->
+<g id="edge3" class="edge" data-name="NutsNFT3.approveNut-&gt;NutsNFT3.approve">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M197.73,-1454C232.53,-1454 277.05,-1454 311.05,-1454" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="311.25,-1457.5 321.25,-1454 311.25,-1450.5 311.25,-1457.5" style=""/>
+</g>
+<!-- ERC721.ownerOf -->
+<g id="node36" class="node" pointer-events="visible" data-name="ERC721.ownerOf">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-289" rx="45.21" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-284.8" font-family="Times,serif" font-size="14.00" style="">ownerOf</text>
+</g>
+<!-- NutsNFT3.approveNut&#45;&gt;ERC721.ownerOf -->
+<g id="edge2" class="edge" data-name="NutsNFT3.approveNut-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M197.49,-1456.29C222.31,-1454.16 249.64,-1446.81 266.16,-1427 343.25,-1334.52 251.65,-453.29 302.16,-344 308.23,-330.86 319.06,-319.46 329.89,-310.5" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.34,-313.03 338.1,-304.14 328.05,-307.5 332.34,-313.03" style=""/>
+</g>
+<!-- NutsNFT3.createNut -->
+<g id="node7" class="node" pointer-events="visible" data-name="NutsNFT3.createNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1616" rx="48.63" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1611.8" font-family="Times,serif" font-size="14.00" style="">createNut</text>
+</g>
+<!-- NutsNFT3.transferFrom -->
+<g id="node32" class="node" pointer-events="visible" data-name="NutsNFT3.transferFrom">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-1616" rx="61.39" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1611.8" font-family="Times,serif" font-size="14.00" style="">transferFrom</text>
+</g>
+<!-- NutsNFT3.createNut&#45;&gt;NutsNFT3.transferFrom -->
+<g id="edge4" class="edge" data-name="NutsNFT3.createNut-&gt;NutsNFT3.transferFrom">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M189.66,-1616C219.49,-1616 258.5,-1616 291.91,-1616" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="292.08,-1619.5 302.08,-1616 292.08,-1612.5 292.08,-1619.5" style=""/>
+</g>
+<!-- NutsNFT3.transferOwnership -->
+<g id="node8" class="node" pointer-events="visible" data-name="NutsNFT3.transferOwnership">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1562" rx="82.78" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1557.8" font-family="Times,serif" font-size="14.00" style="">transferOwnership</text>
+</g>
+<!-- NutsNFT3.transferOwnership&#45;&gt;NutsNFT3.transferFrom -->
+<g id="edge5" class="edge" data-name="NutsNFT3.transferOwnership-&gt;NutsNFT3.transferFrom">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M201.88,-1574.27C222.33,-1578.66 245.3,-1583.82 266.16,-1589 280.28,-1592.51 295.48,-1596.61 309.53,-1600.54" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="308.96,-1604.02 319.54,-1603.36 310.86,-1597.28 308.96,-1604.02" style=""/>
+</g>
+<!-- NutsNFT3.setPriceForOwnership -->
+<g id="node9" class="node" pointer-events="visible" data-name="NutsNFT3.setPriceForOwnership">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-968" rx="97.27" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-963.8" font-family="Times,serif" font-size="14.00" style="">setPriceForOwnership</text>
+</g>
+<!-- NutsNFT3.setPriceForOwnership&#45;&gt;ERC721.ownerOf -->
+<g id="edge6" class="edge" data-name="NutsNFT3.setPriceForOwnership-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M233.77,-962.42C246.17,-957.86 257.55,-951.05 266.16,-941 352.63,-840.07 244.78,-463.88 302.16,-344 308.41,-330.95 319.27,-319.56 330.08,-310.59" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.53,-313.12 338.26,-304.21 328.22,-307.6 332.53,-313.12" style=""/>
+</g>
+<!-- NutsNFT3.payForOwnership -->
+<g id="node10" class="node" pointer-events="visible" data-name="NutsNFT3.payForOwnership">
+
+<ellipse fill="#ffbdb9" stroke="brown" stroke-width="3" cx="141.08" cy="-1508" rx="80.52" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1503.8" font-family="Times,serif" font-size="14.00" style="">payForOwnership</text>
+</g>
+<!-- NutsNFT3.payable -->
+<g id="node33" class="node" pointer-events="visible" data-name="NutsNFT3.payable">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-1508" rx="41.13" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1503.8" font-family="Times,serif" font-size="14.00" style="">payable</text>
+</g>
+<!-- NutsNFT3.payForOwnership&#45;&gt;NutsNFT3.payable -->
+<g id="edge8" class="edge" data-name="NutsNFT3.payForOwnership-&gt;NutsNFT3.payable">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M222.01,-1508C252.15,-1508 285.57,-1508 312.26,-1508" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="312.51,-1511.5 322.51,-1508 312.51,-1504.5 312.51,-1511.5" style=""/>
+</g>
+<!-- NutsNFT3._transfer -->
+<g id="node34" class="node" pointer-events="visible" data-name="NutsNFT3._transfer">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-1562" rx="45.2" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1557.8" font-family="Times,serif" font-size="14.00" style="">_transfer</text>
+</g>
+<!-- NutsNFT3.payForOwnership&#45;&gt;NutsNFT3._transfer -->
+<g id="edge9" class="edge" data-name="NutsNFT3.payForOwnership-&gt;NutsNFT3._transfer">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M201.26,-1520.14C221.86,-1524.56 245.08,-1529.76 266.16,-1535 282.79,-1539.13 300.91,-1544.09 316.9,-1548.61" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="315.98,-1551.99 326.56,-1551.37 317.9,-1545.26 315.98,-1551.99" style=""/>
+</g>
+<!-- NutsNFT3.payForOwnership&#45;&gt;ERC721.ownerOf -->
+<g id="edge7" class="edge" data-name="NutsNFT3.payForOwnership-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M221.7,-1506.4C238.73,-1502.18 254.95,-1494.47 266.16,-1481 347.01,-1383.85 249.23,-458.78 302.16,-344 308.22,-330.86 319.05,-319.46 329.88,-310.5" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="332.33,-313.03 338.09,-304.13 328.04,-307.49 332.33,-313.03" style=""/>
+</g>
+<!-- NutsNFT3.pickupNut -->
+<g id="node11" class="node" pointer-events="visible" data-name="NutsNFT3.pickupNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1346" rx="51.61" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1341.8" font-family="Times,serif" font-size="14.00" style="">pickupNut</text>
+</g>
+<!-- NutsNFT3.deliveredNut -->
+<g id="node12" class="node" pointer-events="visible" data-name="NutsNFT3.deliveredNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1292" rx="61.4" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1287.8" font-family="Times,serif" font-size="14.00" style="">deliveredNut</text>
+</g>
+<!-- NutsNFT3.transportForProcessor -->
+<g id="node13" class="node" pointer-events="visible" data-name="NutsNFT3.transportForProcessor">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1238" rx="96.12" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1233.8" font-family="Times,serif" font-size="14.00" style="">transportForProcessor</text>
+</g>
+<!-- NutsNFT3.transportForWarehouse -->
+<g id="node14" class="node" pointer-events="visible" data-name="NutsNFT3.transportForWarehouse">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1184" rx="102.41" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1179.8" font-family="Times,serif" font-size="14.00" style="">transportForWarehouse</text>
+</g>
+<!-- NutsNFT3.transportForOwner -->
+<g id="node15" class="node" pointer-events="visible" data-name="NutsNFT3.transportForOwner">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-914" rx="85.09" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-909.8" font-family="Times,serif" font-size="14.00" style="">transportForOwner</text>
+</g>
+<!-- NutsNFT3.transportForOwner&#45;&gt;ERC721.ownerOf -->
+<g id="edge10" class="edge" data-name="NutsNFT3.transportForOwner-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M225.22,-911.11C240.85,-906.73 255.58,-899.27 266.16,-887 345.11,-795.4 249.63,-452.93 302.16,-344 308.45,-330.96 319.32,-319.59 330.12,-310.61" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.57,-313.14 338.3,-304.23 328.26,-307.63 332.57,-313.14" style=""/>
+</g>
+<!-- NutsNFT3.processingNut -->
+<g id="node16" class="node" pointer-events="visible" data-name="NutsNFT3.processingNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1076" rx="66.63" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1071.8" font-family="Times,serif" font-size="14.00" style="">processingNut</text>
+</g>
+<!-- NutsNFT3.storringNut -->
+<g id="node17" class="node" pointer-events="visible" data-name="NutsNFT3.storringNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1022" rx="55.62" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1017.8" font-family="Times,serif" font-size="14.00" style="">storringNut</text>
+</g>
+<!-- NutsNFT3.burningNut -->
+<g id="node18" class="node" pointer-events="visible" data-name="NutsNFT3.burningNut">
+
+<ellipse fill="#ffbdb9" stroke="#ffbdb9" stroke-width="3" cx="141.08" cy="-1400" rx="55.62" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1395.8" font-family="Times,serif" font-size="14.00" style="">burningNut</text>
+</g>
+<!-- NutsNFT3._burn -->
+<g id="node35" class="node" pointer-events="visible" data-name="NutsNFT3._burn">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-1157" rx="33.63" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-1152.8" font-family="Times,serif" font-size="14.00" style="">_burn</text>
+</g>
+<!-- NutsNFT3.burningNut&#45;&gt;NutsNFT3._burn -->
+<g id="edge11" class="edge" data-name="NutsNFT3.burningNut-&gt;NutsNFT3._burn">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M196.57,-1398.89C220.15,-1395.88 246.74,-1388.78 266.16,-1373 325.73,-1324.57 349.73,-1231.69 358.34,-1185.1" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="361.82,-1185.56 360.08,-1175.1 354.92,-1184.35 361.82,-1185.56" style=""/>
+</g>
+<!-- NutsNFT3.approveTransporter -->
+<g id="node19" class="node" pointer-events="visible" data-name="NutsNFT3.approveTransporter">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-752" rx="87.36" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-747.8" font-family="Times,serif" font-size="14.00" style="">approveTransporter</text>
+</g>
+<!-- NutsNFT3.approveTransporter&#45;&gt;ERC721.ownerOf -->
+<g id="edge12" class="edge" data-name="NutsNFT3.approveTransporter-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M226.55,-748.43C241.61,-744 255.77,-736.71 266.16,-725 322.58,-661.37 264.15,-420.08 302.16,-344 308.68,-330.95 319.71,-319.52 330.57,-310.5" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="333.05,-313.01 338.78,-304.09 328.74,-307.49 333.05,-313.01" style=""/>
+</g>
+<!-- NutsNFT3.approveProcessor -->
+<g id="node20" class="node" pointer-events="visible" data-name="NutsNFT3.approveProcessor">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-860" rx="79.86" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-855.8" font-family="Times,serif" font-size="14.00" style="">approveProcessor</text>
+</g>
+<!-- NutsNFT3.approveProcessor&#45;&gt;ERC721.ownerOf -->
+<g id="edge13" class="edge" data-name="NutsNFT3.approveProcessor-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M220.66,-858.22C237.94,-854.04 254.52,-846.4 266.16,-833 337.6,-750.73 254.47,-441.97 302.16,-344 308.49,-330.99 319.38,-319.61 330.18,-310.64" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.62,-313.17 338.34,-304.25 328.31,-307.65 332.62,-313.17" style=""/>
+</g>
+<!-- NutsNFT3.approveWarehouse -->
+<g id="node21" class="node" pointer-events="visible" data-name="NutsNFT3.approveWarehouse">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-806" rx="85.64" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-801.8" font-family="Times,serif" font-size="14.00" style="">approveWarehouse</text>
+</g>
+<!-- NutsNFT3.approveWarehouse&#45;&gt;ERC721.ownerOf -->
+<g id="edge14" class="edge" data-name="NutsNFT3.approveWarehouse-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M225.39,-802.89C240.91,-798.5 255.55,-791.1 266.16,-779 330.08,-706.05 259.31,-431.02 302.16,-344 308.6,-330.92 319.62,-319.47 330.49,-310.46" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="332.97,-312.96 338.71,-304.05 328.67,-307.44 332.97,-312.96" style=""/>
+</g>
+<!-- NutsNFT3.batchNuts -->
+<g id="node22" class="node" pointer-events="visible" data-name="NutsNFT3.batchNuts">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-1130" rx="50.38" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-1125.8" font-family="Times,serif" font-size="14.00" style="">batchNuts</text>
+</g>
+<!-- NutsNFT3.batchNuts&#45;&gt;NutsNFT3.mintNut -->
+<g id="edge19" class="edge" data-name="NutsNFT3.batchNuts-&gt;NutsNFT3.mintNut">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M188.85,-1124.27C224.9,-1119.86 274.7,-1113.76 311.75,-1109.23" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="312.33,-1112.68 321.84,-1107.99 311.48,-1105.73 312.33,-1112.68" style=""/>
+</g>
+<!-- NutsNFT3.batchNuts&#45;&gt;NutsNFT3._burn -->
+<g id="edge17" class="edge" data-name="NutsNFT3.batchNuts-&gt;NutsNFT3._burn">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M191.3,-1130.3C231.21,-1133.69 286.71,-1140.63 323.6,-1146.93" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="323.02,-1150.38 333.48,-1148.68 324.25,-1143.49 323.02,-1150.38" style=""/>
+</g>
+<!-- NutsNFT3.batchNuts&#45;&gt;NutsNFT3._burn -->
+<g id="edge18" class="edge" data-name="NutsNFT3.batchNuts-&gt;NutsNFT3._burn">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M182.53,-1140.32C221.45,-1146.89 280.09,-1154.11 319.79,-1157.23" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="319.72,-1160.73 329.95,-1157.96 320.23,-1153.75 319.72,-1160.73" style=""/>
+</g>
+<!-- NutsNFT3.batchNuts&#45;&gt;ERC721.ownerOf -->
+<g id="edge15" class="edge" data-name="NutsNFT3.batchNuts-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M189.22,-1124.9C215.95,-1122.5 247.65,-1115.88 266.16,-1094 320.68,-1029.53 266.2,-411.39 302.16,-335 306.97,-324.78 314.64,-315.59 322.92,-308.06" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="325.19,-310.72 330.63,-301.63 320.71,-305.35 325.19,-310.72" style=""/>
+</g>
+<!-- NutsNFT3.batchNuts&#45;&gt;ERC721.ownerOf -->
+<g id="edge16" class="edge" data-name="NutsNFT3.batchNuts-&gt;ERC721.ownerOf">
+
+<path fill="none" stroke="white" stroke-width="2" d="M182.25,-1140.4C210.23,-1141.56 246.02,-1135.82 266.16,-1112 320.68,-1047.53 266.2,-429.39 302.16,-353 309.92,-336.52 325.09,-322.74 338.29,-311.96" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="340.57,-314.63 346.18,-305.64 336.19,-309.17 340.57,-314.63" style=""/>
+</g>
+<!-- NutsNFT3.decreaseWeight -->
+<g id="node23" class="node" pointer-events="visible" data-name="NutsNFT3.decreaseWeight">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-698" rx="72.89" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-693.8" font-family="Times,serif" font-size="14.00" style="">decreaseWeight</text>
+</g>
+<!-- console.log -->
+<g id="node37" class="node" pointer-events="visible" data-name="console.log">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-204" rx="27" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-199.8" font-family="Times,serif" font-size="14.00" style="">log</text>
+</g>
+<!-- NutsNFT3.decreaseWeight&#45;&gt;console.log -->
+<g id="edge20" class="edge" data-name="NutsNFT3.decreaseWeight-&gt;console.log">
+
+<path fill="none" stroke="white" stroke-width="2" d="M214.07,-697.51C233.61,-693.74 252.98,-685.98 266.16,-671 326.89,-602.02 261.37,-341.36 302.16,-259 309.53,-244.12 322.78,-231.36 335.01,-221.88" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="337.23,-224.59 343.23,-215.86 333.09,-218.95 337.23,-224.59" style=""/>
+</g>
+<!-- weight.toString -->
+<g id="node38" class="node" pointer-events="visible" data-name="weight.toString">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-119" rx="42.31" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-114.8" font-family="Times,serif" font-size="14.00" style="">toString</text>
+</g>
+<!-- NutsNFT3.decreaseWeight&#45;&gt;weight.toString -->
+<g id="edge21" class="edge" data-name="NutsNFT3.decreaseWeight-&gt;weight.toString">
+
+<path fill="none" stroke="white" stroke-width="2" d="M213.89,-697.7C233.54,-693.95 253.01,-686.16 266.16,-671 338.71,-587.34 253.75,-273.59 302.16,-174 308.65,-160.65 319.93,-149.03 331,-139.95" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="333.18,-142.69 338.95,-133.8 328.9,-137.15 333.18,-142.69" style=""/>
+</g>
+<!-- _weightGram.toString -->
+<g id="node39" class="node" pointer-events="visible" data-name="_weightGram.toString">
+
+<ellipse fill="#edad56" stroke="#edad56" stroke-width="3" cx="363.6" cy="-34" rx="42.31" ry="18" style=""/>
+<text text-anchor="middle" x="363.6" y="-29.8" font-family="Times,serif" font-size="14.00" style="">toString</text>
+</g>
+<!-- NutsNFT3.decreaseWeight&#45;&gt;_weightGram.toString -->
+<g id="edge22" class="edge" data-name="NutsNFT3.decreaseWeight-&gt;_weightGram.toString">
+
+<path fill="none" stroke="white" stroke-width="2" d="M213.99,-697.78C233.64,-694.04 253.09,-686.22 266.16,-671 350.54,-572.66 246.13,-205.84 302.16,-89 308.58,-75.62 319.84,-63.99 330.92,-54.91" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="333.11,-57.65 338.89,-48.77 328.83,-52.11 333.11,-57.65" style=""/>
+</g>
+<!-- NutsNFT3.addISO -->
+<g id="node24" class="node" pointer-events="visible" data-name="NutsNFT3.addISO">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-644" rx="40.57" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-639.8" font-family="Times,serif" font-size="14.00" style="">addISO</text>
+</g>
+<!-- NutsNFT3.getISObyIndex -->
+<g id="node25" class="node" pointer-events="visible" data-name="NutsNFT3.getISObyIndex">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-590" rx="70.07" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-585.8" font-family="Times,serif" font-size="14.00" style="">getISObyIndex</text>
+</g>
+<!-- NutsNFT3.getISOLength -->
+<g id="node26" class="node" pointer-events="visible" data-name="NutsNFT3.getISOLength">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-536" rx="65.99" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-531.8" font-family="Times,serif" font-size="14.00" style="">getISOLength</text>
+</g>
+<!-- NutsNFT3.getNutState -->
+<g id="node27" class="node" pointer-events="visible" data-name="NutsNFT3.getNutState">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-482" rx="56.76" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-477.8" font-family="Times,serif" font-size="14.00" style="">getNutState</text>
+</g>
+<!-- NutsNFT3.getNutType -->
+<g id="node28" class="node" pointer-events="visible" data-name="NutsNFT3.getNutType">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-428" rx="57.32" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-423.8" font-family="Times,serif" font-size="14.00" style="">getNutType</text>
+</g>
+<!-- NutsNFT3.getNutWeight -->
+<g id="node29" class="node" pointer-events="visible" data-name="NutsNFT3.getNutWeight">
+
+<ellipse fill="#ff9797" stroke="#ff9797" stroke-width="3" cx="141.08" cy="-374" rx="65.99" ry="18" style=""/>
+<text text-anchor="middle" x="141.08" y="-369.8" font-family="Times,serif" font-size="14.00" style="">getNutWeight</text>
+</g>
+<!-- key -->
+<g id="node40" class="node" pointer-events="visible" data-name="key">
+
+<polygon fill="#edad56" stroke="transparent" stroke-width="3" points="206.08,-2011 76.08,-2011 76.08,-1923 206.08,-1923 206.08,-2011" style=""/>
+<text text-anchor="start" x="125.72" y="-1992.4" font-family="Times,serif" font-size="14.00" style="">Internal Call</text>
+<text text-anchor="start" x="121.82" y="-1972.4" font-family="Times,serif" font-size="14.00" style="">External Call</text>
+<text text-anchor="start" x="99.28" y="-1952.4" font-family="Times,serif" font-size="14.00" style="">Defined Contract</text>
+<text text-anchor="start" x="85.68" y="-1932.4" font-family="Times,serif" font-size="14.00" style="">Undefined Contract</text>
+</g>
+<!-- key2 -->
+<g id="node41" class="node" pointer-events="visible" data-name="key2">
+
+<polygon fill="#edad56" stroke="transparent" stroke-width="3" points="390.6,-2011 336.6,-2011 336.6,-1923 390.6,-1923 390.6,-2011" style=""/>
+<text text-anchor="start" x="351.36" y="-1992.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<text text-anchor="start" x="351.36" y="-1972.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="#445773" stroke="transparent" points="349.6,-1947 349.6,-1967 377.6,-1967 377.6,-1947 349.6,-1947" style=""/>
+<text text-anchor="start" x="351.36" y="-1952.4" font-family="Times,serif" font-size="14.00" style="">   </text>
+<polygon fill="none" stroke="#e8726d" points="351.6,-1929 351.6,-1945 375.6,-1945 375.6,-1929 351.6,-1929" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge23" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="#1bc6a6" stroke-width="2" d="M199.08,-1997C262.03,-1997 280.26,-1997 338.49,-1997" style=""/>
+<polygon fill="#1bc6a6" stroke="#1bc6a6" stroke-width="2" points="338.6,-2000.5 348.6,-1997 338.6,-1993.5 338.6,-2000.5" style=""/>
+</g>
+<!-- key&#45;&gt;key2 -->
+<g id="edge24" class="edge" data-name="key-&gt;key2">
+
+<path fill="none" stroke="white" stroke-width="2" d="M199.08,-1977C262.03,-1977 280.26,-1977 338.49,-1977" style=""/>
+<polygon fill="white" stroke="white" stroke-width="2" points="338.6,-1980.5 348.6,-1977 338.6,-1973.5 338.6,-1980.5" style=""/>
+</g>
+</g>
+</svg>

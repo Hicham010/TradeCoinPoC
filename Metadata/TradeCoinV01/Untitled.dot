@@ -1,0 +1,86 @@
+digraph G {
+  graph [ ratio = "auto", page = "100", compound =true, bgcolor = "#2e3e56" ];
+  node [ style = "filled", fillcolor = "#edad56", color = "#edad56", penwidth =3 ];
+  edge [ color = "#fcfcfc", penwidth =2, fontname = "helvetica Neue Ultra Light" ];
+subgraph "clusterNutsNFT" {
+  graph [ label = "NutsNFT", color = "#445773", fontcolor = "#f0f0f0", style = "rounded", bgcolor = "#445773" ];
+  "NutsNFT.<Constructor>" [ label = "<Constructor>", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.mintNut" [ label = "mintNut", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.decreaseWeight" [ label = "decreaseWeight", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.addISOList" [ label = "addISOList", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.addISO" [ label = "addISO", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.getISOLength" [ label = "getISOLength", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.getCargoByIndex" [ label = "getCargoByIndex", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.transport" [ label = "transport", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.delivered" [ label = "delivered", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT.batchNuts" [ label = "batchNuts", color = "#FF9797", fillcolor = "#FF9797" ];
+  "NutsNFT._mint" [ label = "_mint" ];
+  "NutsNFT.approve" [ label = "approve" ];
+  "NutsNFT.transferFrom" [ label = "transferFrom" ];
+  "NutsNFT._burn" [ label = "_burn" ];
+}
+
+subgraph "clustertokenCounter" {
+  graph [ label = "tokenCounter", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "tokenCounter.add" [ label = "add" ];
+}
+
+subgraph "clusterERC721" {
+  graph [ label = "ERC721", color = "#e8726d", fontcolor = "#f0f0f0", style = "rounded,dashed", bgcolor = "#3b4b63" ];
+  "ERC721.ownerOf" [ label = "ownerOf" ];
+}
+
+  "NutsNFT.mintNut";
+  "tokenCounter.add";
+  "NutsNFT._mint";
+  "NutsNFT.decreaseWeight";
+  "ERC721.ownerOf";
+  "NutsNFT.addISOList";
+  "NutsNFT.addISO";
+  "NutsNFT.transport";
+  "NutsNFT.approve";
+  "NutsNFT.delivered";
+  "NutsNFT.transferFrom";
+  "NutsNFT.batchNuts";
+  "NutsNFT._burn";
+  "NutsNFT.mintNut" -> "tokenCounter.add" [ color = "white" ];
+  "NutsNFT.mintNut" -> "NutsNFT._mint" [ color = "#1bc6a6" ];
+  "NutsNFT.decreaseWeight" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.addISOList" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.addISO" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.transport" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.transport" -> "NutsNFT.approve" [ color = "#1bc6a6" ];
+  "NutsNFT.delivered" -> "NutsNFT.transferFrom" [ color = "#1bc6a6" ];
+  "NutsNFT.batchNuts" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.batchNuts" -> "ERC721.ownerOf" [ color = "white" ];
+  "NutsNFT.batchNuts" -> "NutsNFT._burn" [ color = "#1bc6a6" ];
+  "NutsNFT.batchNuts" -> "NutsNFT._burn" [ color = "#1bc6a6" ];
+  "NutsNFT.batchNuts" -> "NutsNFT.mintNut" [ color = "#1bc6a6" ];
+
+
+rankdir=LR
+node [shape=plaintext]
+subgraph cluster_01 { 
+label = "Legend";
+key [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td align="right" port="i1">Internal Call</td></tr>
+  <tr><td align="right" port="i2">External Call</td></tr>
+  <tr><td align="right" port="i3">Defined Contract</td></tr>
+  <tr><td align="right" port="i4">Undefined Contract</td></tr>
+  </table>>]
+key2 [label=<<table border="0" cellpadding="2" cellspacing="0" cellborder="0">
+  <tr><td port="i1">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i2">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i3" bgcolor="#445773">&nbsp;&nbsp;&nbsp;</td></tr>
+  <tr><td port="i4">
+    <table border="1" cellborder="0" cellspacing="0" cellpadding="7" color="#e8726d">
+      <tr>
+       <td></td>
+      </tr>
+     </table>
+  </td></tr>
+  </table>>]
+key:i1:e -> key2:i1:w [color="#1bc6a6"]
+key:i2:e -> key2:i2:w [color="white"]
+}
+}

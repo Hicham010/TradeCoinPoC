@@ -12,7 +12,8 @@ template Main() {
 
   signal output out;
 
-  assert(dollar > 10);
+  // assert(dollar > 10);
+  // assert(dollar < 10000);
 
   var commodityProps[4] = [commodity, weight, dollar, randomness];
 

@@ -155,7 +155,7 @@ contract NutsNFT3 is ERC721, ReentrancyGuard {
     function setPriceForOwnership(
         uint256 _tokenId,
         uint256 priceInWei,
-        address newOwner,
+        address _newOwner,
         bool isFiat
     ) external {
         require(
@@ -163,7 +163,7 @@ contract NutsNFT3 is ERC721, ReentrancyGuard {
             "You are not the owner"
         );
         priceForOwnership[_tokenId] = priceInWei;
-        addressOfNewOwner[_tokenId] = newOwner;
+        addressOfNewOwner[_tokenId] = _newOwner;
         payInFiat[_tokenId] = isFiat;
     }
 

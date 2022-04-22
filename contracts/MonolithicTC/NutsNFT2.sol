@@ -1,11 +1,8 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-// Not needed for solidity 0.8.x
-// import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-// import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "hardhat/console.sol";
 
@@ -50,7 +47,7 @@ contract NutsNFT2 is ERC721 {
         address indexed receiver,
         uint256 indexed _tokenId
     );
-    event NutDelevered(
+    event NutDelivered(
         address indexed transporter,
         address indexed receiver,
         uint256 indexed _tokenId
@@ -162,7 +159,7 @@ contract NutsNFT2 is ERC721 {
         nut[_tokenId].nut_state = nutState.Transporting;
     }
 
-    function deleveredNut(uint256 _tokenId, address _receiver)
+    function deliveredNut(uint256 _tokenId, address _receiver)
         external
         onlyApprovedTransporter(_tokenId, msg.sender)
     {
@@ -233,7 +230,7 @@ contract NutsNFT2 is ERC721 {
         );
         nut[_tokenId].nut_state = nutState.Processing;
 
-        emit NutDelevered(approvedTransporter[_tokenId], msg.sender, _tokenId);
+        emit NutDelivered(approvedTransporter[_tokenId], msg.sender, _tokenId);
         // approvedTransporter[_tokenId] = address(0);
     }
 
@@ -247,7 +244,7 @@ contract NutsNFT2 is ERC721 {
         );
         nut[_tokenId].nut_state = nutState.Stored;
 
-        emit NutDelevered(approvedTransporter[_tokenId], msg.sender, _tokenId);
+        emit NutDelivered(approvedTransporter[_tokenId], msg.sender, _tokenId);
         // approvedTransporter[_tokenId] = address(0);
     }
 

@@ -1,12 +1,10 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 // Probably not needed for solidity 0.8.x
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
-
-// import "@openzeppelin/contracts/utils/Counters.sol";
 
 import "hardhat/console.sol";
 
@@ -50,27 +48,10 @@ contract NutsNFT is ERC721 {
         uint256 weight = weight_gram[_tokenId];
         require(weight >= _weight_gram, "Weight can't be negative");
 
-        // console.log(
-        //     "Decreasing weight of %s with amount of %s",
-        //     weight.toString(),
-        //     _weight_gram.toString()
-        // );
-
         weight_gram[_tokenId] = weight - _weight_gram;
 
         return weight_gram[_tokenId];
     }
-
-    // function increaseWeight(uint _weight_gram, uint256 _tokenId) public returns(uint){
-    //     require(msg.sender == ERC721.ownerOf(_tokenId), "You are not the owner");
-
-    //     console.log("Increasing weight of %s g with amount of %s g",
-    //         weight_gram[_tokenId].toString(), _weight_gram.toString());
-
-    //     weight_gram[_tokenId] = weight_gram[_tokenId] + _weight_gram;
-
-    //     return weight_gram[_tokenId];
-    // }
 
     function addISOList(string[] memory _ISO_list, uint256 _tokenId) public {
         require(
