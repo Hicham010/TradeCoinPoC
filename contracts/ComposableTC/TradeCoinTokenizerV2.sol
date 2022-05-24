@@ -4,16 +4,16 @@ pragma solidity ^0.8.4;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./ITradeCoinTokenizer.sol";
 
-contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
+contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
     uint256 public tokenCounter;
 
-    struct TradeCoinCommodity {
+    struct TradeCoinToken {
         string commodity;
         uint256 amount;
         string unit;
     }
 
-    mapping(uint256 => TradeCoinCommodity) public tradeCoinCommodity;
+    mapping(uint256 => TradeCoinToken) public tradeCoinToken;
 
     constructor() ERC721("TradeCoinTokenizerV2", "TCTV2") {}
 
@@ -22,7 +22,7 @@ contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
         uint256 _amount,
         string memory _unit
     ) external override {
-        tradeCoinCommodity[tokenCounter] = TradeCoinCommodity(
+        tradeCoinToken[tokenCounter] = TradeCoinToken(
             _commodity,
             _amount,
             _unit
@@ -40,7 +40,7 @@ contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
             _isApprovedOrOwner(msg.sender, tokenId),
             "Caller is not owner nor approved"
         );
-        tradeCoinCommodity[tokenId].amount += amountIncrease;
+        tradeCoinToken[tokenId].amount += amountIncrease;
         emit IncreaseCommodity(tokenId, amountIncrease);
     }
 
@@ -52,7 +52,7 @@ contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
             _isApprovedOrOwner(msg.sender, tokenId),
             "Caller is not owner nor approved"
         );
-        tradeCoinCommodity[tokenId].amount -= amountDecrease;
+        tradeCoinToken[tokenId].amount -= amountDecrease;
         emit DecreaseCommodity(tokenId, amountDecrease);
     }
 
@@ -61,7 +61,7 @@ contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
             _isApprovedOrOwner(msg.sender, tokenId),
             "caller is not owner nor approved"
         );
-        delete tradeCoinCommodity[tokenId];
+        delete tradeCoinToken[tokenId];
         _burn(tokenId);
     }
 
@@ -75,8 +75,8 @@ contract TradeCoinTokenizer is ERC721, ITradeCoinTokenizer {
             string memory unit
         )
     {
-        commodity = tradeCoinCommodity[tokenId].commodity;
-        amount = tradeCoinCommodity[tokenId].amount;
-        unit = tradeCoinCommodity[tokenId].unit;
+        commodity = tradeCoinToken[tokenId].commodity;
+        amount = tradeCoinToken[tokenId].amount;
+        unit = tradeCoinToken[tokenId].unit;
     }
 }
