@@ -12,7 +12,6 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
     uint256 public contractWeiBalance;
     TradeCoinTokenizerV2 public tradeCoinTokenizerV2;
 
-    // structure of the metadata
     struct TradeCoinCommodity {
         uint256 amount;
         State state;
@@ -28,7 +27,6 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         bool isPayed;
     }
 
-    // Mapping for the metadata of the tradecoin
     mapping(uint256 => TradeCoinCommodity) public tradeCoinCommodity;
     mapping(uint256 => CommoditySale) public commoditySaleQueue;
 
@@ -143,7 +141,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
             string memory commodity,
             uint256 amount,
             string memory unit
-        ) = tradeCoinTokenizerV2.getTokenData(tokenIdOfTokenizer);
+        ) = tradeCoinTokenizerV2.tradeCoinToken(tokenIdOfTokenizer);
 
         emit MintCommodity(
             tokenCounter,

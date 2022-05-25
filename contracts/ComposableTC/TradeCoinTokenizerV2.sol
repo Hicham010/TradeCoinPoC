@@ -64,19 +64,4 @@ contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
         delete tradeCoinToken[tokenId];
         _burn(tokenId);
     }
-
-    function getTokenData(uint256 tokenId)
-        external
-        view
-        override
-        returns (
-            string memory commodity,
-            uint256 amount,
-            string memory unit
-        )
-    {
-        commodity = tradeCoinToken[tokenId].commodity;
-        amount = tradeCoinToken[tokenId].amount;
-        unit = tradeCoinToken[tokenId].unit;
-    }
 }

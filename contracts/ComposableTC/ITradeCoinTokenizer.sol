@@ -30,13 +30,4 @@ interface ITradeCoinTokenizer {
     function decreaseAmount(uint256 tokenId, uint256 amountDecrease) external;
 
     function burnToken(uint256 tokenId) external;
-
-    function getTokenData(uint256 tokenId)
-        external
-        view
-        returns (
-            string memory commodity,
-            uint256 amount,
-            string memory unit
-        );
 }
