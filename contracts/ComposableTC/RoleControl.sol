@@ -4,8 +4,8 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 
 contract RoleControl is AccessControl {
     bytes32 public constant TOKENIZER_ROLE = keccak256("TOKENIZER_ROLE"); // hash a MINTER_ROLE as a role constant
-    bytes32 public constant PRODUCT_HANDLER_ROLE =
-        keccak256("PRODUCT_HANDLER_ROLE"); // hash a BURNER_ROLE as a role constant
+    bytes32 public constant TRANSFORMATION_HANDLER_ROLE =
+        keccak256("TRANSFORMATION_HANDLER_ROLE"); // hash a BURNER_ROLE as a role constant
     bytes32 public constant INFORMATION_HANDLER_ROLE =
         keccak256("INFORMATION_HANDLER_ROLE"); // hash a BURNER_ROLE as a role constant
 
@@ -17,12 +17,12 @@ contract RoleControl is AccessControl {
         // SETUP role Hierarchy:
         // DEFAULT_ADMIN_ROLE > MINTER_ROLE > BURNER_ROLE > no role
         _setRoleAdmin(TOKENIZER_ROLE, DEFAULT_ADMIN_ROLE);
-        _setRoleAdmin(PRODUCT_HANDLER_ROLE, DEFAULT_ADMIN_ROLE);
+        _setRoleAdmin(TRANSFORMATION_HANDLER_ROLE, DEFAULT_ADMIN_ROLE);
         _setRoleAdmin(INFORMATION_HANDLER_ROLE, DEFAULT_ADMIN_ROLE);
     }
 
     // Create a bool check to see if a account address has the role admin
-    function isAdmin(address account) public view virtual returns (bool) {
+    function isAdmin(address account) public view returns (bool) {
         return hasRole(DEFAULT_ADMIN_ROLE, account);
     }
 
@@ -34,109 +34,91 @@ contract RoleControl is AccessControl {
     }
 
     // Add a user address as a admin
-    function addAdmin(address account) public virtual onlyAdmin {
+    function addAdmin(address account) external onlyAdmin {
         grantRole(DEFAULT_ADMIN_ROLE, account);
     }
 
     // Remove a user as a admin
-    function removeAdmin(address account) public virtual onlyAdmin {
+    function removeAdmin(address account) external onlyAdmin {
         revokeRole(DEFAULT_ADMIN_ROLE, account);
     }
 
     // Create a bool check to see if a account address has the role admin or Tokenizer
-    function isTokenizerOrAdmin(address account)
-        public
-        view
-        virtual
-        returns (bool)
-    {
+    function isTokenizer(address account) public view returns (bool) {
         return (hasRole(TOKENIZER_ROLE, account) ||
             hasRole(DEFAULT_ADMIN_ROLE, account));
     }
 
     // Create a modifier that can be used in other contract to make a pre-check
     // That makes sure that the sender of the transaction (msg.sender) is a admin or Tokenizer
-    modifier onlyTokenizerOrAdmin() {
-        require(
-            isTokenizerOrAdmin(msg.sender),
-            "Restricted to FTokenizer or admins."
-        );
+    modifier onlyTokenizer() {
+        require(isTokenizer(msg.sender), "Restricted to FTokenizer or admins.");
         _;
     }
 
     // Add a user address as a Tokenizer
-    function addTokenizer(address account) public virtual onlyAdmin {
+    function addTokenizer(address account) external onlyAdmin {
         grantRole(TOKENIZER_ROLE, account);
     }
 
     // remove a user address as a Tokenizer
-    function removeTokenizer(address account) public virtual onlyAdmin {
+    function removeTokenizer(address account) external onlyAdmin {
         revokeRole(TOKENIZER_ROLE, account);
     }
 
     // Create a bool check to see if a account address has the role admin or ProductHandlers
-    function isProductHandlerOrAdmin(address account)
+    function isTransformationHandler(address account)
         public
         view
-        virtual
         returns (bool)
     {
-        return (hasRole(PRODUCT_HANDLER_ROLE, account) ||
+        return (hasRole(TRANSFORMATION_HANDLER_ROLE, account) ||
             hasRole(DEFAULT_ADMIN_ROLE, account));
     }
 
     // Create a modifier that can be used in other contract to make a pre-check
     // That makes sure that the sender of the transaction (msg.sender) is a admin or ProductHandlers
-    modifier onlyProductHandlerOrAdmin() {
+    modifier onlyTransformationHandler() {
         require(
-            isProductHandlerOrAdmin(msg.sender),
+            isTransformationHandler(msg.sender),
             "Restricted to ProductHandlers or admins."
         );
         _;
     }
 
     // Add a user address as a ProductHandlers
-    function addProductHandler(address account) public virtual onlyAdmin {
-        grantRole(PRODUCT_HANDLER_ROLE, account);
+    function addTransformationHandler(address account) external onlyAdmin {
+        grantRole(TRANSFORMATION_HANDLER_ROLE, account);
     }
 
     // remove a user address as a ProductHandlers
-    function removeProductHandler(address account) public virtual onlyAdmin {
-        revokeRole(PRODUCT_HANDLER_ROLE, account);
+    function removeTransformationHandler(address account) public onlyAdmin {
+        revokeRole(TRANSFORMATION_HANDLER_ROLE, account);
     }
 
     // Create a bool check to see if a account address has the role admin or InformationHandlers
-    function isInformationHandlerOrAdmin(address account)
-        public
-        view
-        virtual
-        returns (bool)
-    {
+    function isInformationHandler(address account) public view returns (bool) {
         return (hasRole(INFORMATION_HANDLER_ROLE, account) ||
             hasRole(DEFAULT_ADMIN_ROLE, account));
     }
 
     // Create a modifier that can be used in other contract to make a pre-check
     // That makes sure that the sender of the transaction (msg.sender) is a admin or InformationHandlers
-    modifier onlyInformationHandlerOrAdmin() {
+    modifier onlyInformationHandler() {
         require(
-            isInformationHandlerOrAdmin(msg.sender),
+            isInformationHandler(msg.sender),
             "Restricted to InformationHandlers or admins."
         );
         _;
     }
 
     // Add a user address as a InformationHandlers
-    function addInformationHandler(address account) public virtual onlyAdmin {
+    function addInformationHandler(address account) public onlyAdmin {
         grantRole(INFORMATION_HANDLER_ROLE, account);
     }
 
     // remove a user address as a InformationHandlers
-    function removeInformationHandler(address account)
-        public
-        virtual
-        onlyAdmin
-    {
+    function removeInformationHandler(address account) public onlyAdmin {
         revokeRole(INFORMATION_HANDLER_ROLE, account);
     }
 }

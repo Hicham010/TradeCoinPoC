@@ -67,7 +67,7 @@ contract TradeCoinComposition is
     function createComposition(
         string memory compositionName,
         uint256[] memory tokenIdsOfTC
-    ) external override onlyTokenizerOrAdmin {
+    ) external override onlyTokenizer {
         require(
             tokenIdsOfTC.length > 1,
             "You can't make a composition of less then 2 tokens"
@@ -117,7 +117,7 @@ contract TradeCoinComposition is
     function appendProductToComposition(
         uint256 _tokenIdComposition,
         uint256 _tokenIdTC
-    ) external override onlyTokenizerOrAdmin {
+    ) external override onlyTokenizer {
         // require(
         //     tradeCoinComposition[_tokenIdComposition].state ==
         //         State.PendingCreation,
@@ -137,7 +137,7 @@ contract TradeCoinComposition is
     function removeProductFromComposition(
         uint256 _tokenIdComposition,
         uint256 _indexTokenIdTC
-    ) external override onlyTokenizerOrAdmin {
+    ) external override onlyTokenizer {
         uint256 lengthTokenIds = tradeCoinComposition[_tokenIdComposition]
             .tokenIdsOfTC
             .length;
@@ -300,7 +300,7 @@ contract TradeCoinComposition is
 
         uint256[] memory collectiveProductIds = new uint256[](
             tradeCoinComposition[_tokenIds[0]].tokenIdsOfTC.length +
-                tradeCoinComposition[_tokenIds[0]].tokenIdsOfTC.length
+                tradeCoinComposition[_tokenIds[1]].tokenIdsOfTC.length
         );
 
         collectiveProductIds = concatenateArrays(
@@ -353,7 +353,7 @@ contract TradeCoinComposition is
     function addInformation(uint256 _tokenId)
         external
         override
-        onlyInformationHandlerOrAdmin
+        onlyInformationHandler
         notAtState(State.NonExistent, _tokenId)
     {
         emit AddInformationTo(_tokenId, msg.sender);

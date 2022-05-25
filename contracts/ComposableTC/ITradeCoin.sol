@@ -112,7 +112,7 @@ interface ITradeCoin {
 
     function paymentOfToken(uint256 tokenIdOfTokenizer) external payable;
 
-    function mintProduct(uint256 tokenIdOfTokenizer) external;
+    function mintCommodity(uint256 tokenIdOfTokenizer) external;
 
     function addTransformation(uint256 _tokenId, string memory transformation)
         external;
