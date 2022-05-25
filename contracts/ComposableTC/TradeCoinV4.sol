@@ -24,7 +24,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         address owner;
         address handler;
         uint256 priceInWei;
-        bool isPayed;
+        bool isPaid;
     }
 
     mapping(uint256 => TradeCoinCommodity) public tradeCoinCommodity;
@@ -77,13 +77,12 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         override
     {
         require(
-            commoditySaleQueue[tokenIdOfTokenizer].isPayed &&
+            commoditySaleQueue[tokenIdOfTokenizer].isPaid &&
                 commoditySaleQueue[tokenIdOfTokenizer].priceInWei == msg.value,
             "Not enough Ether"
         );
-        assert(address(this).balance == contractWeiBalance);
 
-        commoditySaleQueue[tokenIdOfTokenizer].isPayed = true;
+        commoditySaleQueue[tokenIdOfTokenizer].isPaid = true;
         contractWeiBalance += msg.value;
 
         emit PaymentOfToken(
@@ -100,7 +99,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         nonReentrant
     {
         require(
-            commoditySaleQueue[tokenIdOfTokenizer].isPayed,
+            commoditySaleQueue[tokenIdOfTokenizer].isPaid,
             "Not payed for yet"
         );
         require(
