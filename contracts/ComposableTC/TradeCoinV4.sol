@@ -61,6 +61,14 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
             priceInWei,
             priceInWei == 0
         );
+
+        emit InitializeSale(
+            tokenIdOfTokenizer,
+            msg.sender,
+            owner,
+            priceInWei,
+            priceInWei == 0
+        );
     }
 
     function paymentOfToken(uint256 tokenIdOfTokenizer)
@@ -78,7 +86,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         commoditySaleQueue[tokenIdOfTokenizer].isPayed = true;
         contractWeiBalance += msg.value;
 
-        emit PayForCommercialTx(
+        emit PaymentOfToken(
             tokenIdOfTokenizer,
             msg.sender,
             commoditySaleQueue[tokenIdOfTokenizer].priceInWei
@@ -123,7 +131,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
 
         tradeCoinTokenizerV2.burnToken(tokenIdOfTokenizer);
 
-        emit FinishCommercialTx(
+        emit CompleteSale(
             tokenCounter,
             commoditySaleQueue[tokenIdOfTokenizer].seller,
             msg.sender

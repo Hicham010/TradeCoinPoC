@@ -49,7 +49,7 @@ interface ITradeCoin {
         uint256[] tokenIds
     );
 
-    event InitiateCommercialTx(
+    event InitializeSale(
         uint256 indexed tokenIdTCT,
         address indexed seller,
         address indexed buyer,
@@ -57,13 +57,13 @@ interface ITradeCoin {
         bool payInFiat
     );
 
-    event PayForCommercialTx(
+    event PaymentOfToken(
         uint256 indexed tokenIdTCT,
         address indexed payer,
         uint256 priceInWei
     );
 
-    event FinishCommercialTx(
+    event CompleteSale(
         uint256 indexed tokenId,
         address indexed seller,
         address indexed functionCaller
