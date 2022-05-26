@@ -100,6 +100,12 @@ contract TradeCoinCompositionV3 is
         (uint256 amountOfTC, , , ) = tradeCoinV4.tradeCoinCommodity(_tokenIdTC);
         tradeCoinComposition[_tokenIdComposition]
             .cumulativeAmount += amountOfTC;
+
+        emit AppendCommodityToComposition(
+            _tokenIdComposition,
+            msg.sender,
+            _tokenIdTC
+        );
     }
 
     function removeCommodityFromComposition(
@@ -129,6 +135,12 @@ contract TradeCoinCompositionV3 is
         (uint256 amountOfTC, , , ) = tradeCoinV4.tradeCoinCommodity(tokenIdTC);
         tradeCoinComposition[_tokenIdComposition]
             .cumulativeAmount -= amountOfTC;
+
+        emit RemoveCommodityFromComposition(
+            _tokenIdComposition,
+            msg.sender,
+            tokenIdTC
+        );
     }
 
     function decomposition(uint256 _tokenId) external override {

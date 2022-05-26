@@ -42,13 +42,13 @@ interface ITradeCoinComposition {
 
     // event BatchComposition(address indexed caller, uint256[] batchedTokenIds);
 
-    event RemoveProductFromComposition(
+    event RemoveCommodityFromComposition(
         uint256 indexed tokenId,
         address indexed caller,
         uint256 tokenIdOfProduct
     );
 
-    event AppendProductToComposition(
+    event AppendCommodityToComposition(
         uint256 indexed tokenId,
         address indexed caller,
         uint256 tokenIdOfProduct
