@@ -34,13 +34,13 @@ interface ITradeCoinComposition {
         string transformation
     );
 
-    event SplitComposition(
-        uint256 indexed tokenId,
-        address indexed caller,
-        uint256[] newTokenIds
-    );
+    // event SplitComposition(
+    //     uint256 indexed tokenId,
+    //     address indexed caller,
+    //     uint256[] newTokenIds
+    // );
 
-    event BatchComposition(address indexed caller, uint256[] batchedTokenIds);
+    // event BatchComposition(address indexed caller, uint256[] batchedTokenIds);
 
     event RemoveProductFromComposition(
         uint256 indexed tokenId,
@@ -54,26 +54,26 @@ interface ITradeCoinComposition {
         uint256 tokenIdOfProduct
     );
 
-    event DecompositionOf(
+    event Decomposition(
         uint256 indexed tokenId,
         address indexed caller,
         uint256[] productIds
     );
 
-    event ChangeStateAndHandlerOf(
+    event ChangeStateAndHandler(
         uint256 indexed tokenId,
         address indexed caller,
         State newState,
         address newCurrentHandler
     );
 
-    event QualityCheckCommodity(
+    event QualityCheckComposition(
         uint256 indexed tokenId,
         address indexed checker,
         string data
     );
 
-    event LocationOfCommodity(
+    event LocationOfComposition(
         uint256 indexed tokenId,
         address indexed locationSignaler,
         uint256 latitude,
@@ -81,7 +81,11 @@ interface ITradeCoinComposition {
         uint256 radius
     );
 
-    event AddInformationTo(uint256 indexed tokenId, address indexed caller);
+    event AddInformation(
+        uint256 indexed tokenId,
+        address indexed caller,
+        string data
+    );
 
     event BurnComposition(
         uint256 indexed tokenId,
@@ -94,12 +98,12 @@ interface ITradeCoinComposition {
         uint256[] memory tokenIdsOfTC
     ) external;
 
-    function appendProductToComposition(
+    function appendCommodityToComposition(
         uint256 _tokenIdComposition,
         uint256 _tokenIdTC
     ) external;
 
-    function removeProductFromComposition(
+    function removeCommodityFromComposition(
         uint256 _tokenIdComposition,
         uint256 _indexTokenIdTC
     ) external;
@@ -108,8 +112,20 @@ interface ITradeCoinComposition {
 
     function addTransformation(
         uint256 _tokenId,
-        uint256 weightLoss,
         string memory _transformationCode
+    ) external;
+
+    function addInformationToComposition(uint256 _tokenId, string memory data)
+        external;
+
+    function checkQualityOfComposition(uint256 _tokenId, string memory data)
+        external;
+
+    function confirmCompositionLocation(
+        uint256 _tokenId,
+        uint256 latitude,
+        uint256 longitude,
+        uint256 radius
     ) external;
 
     function changeStateAndHandler(
@@ -118,14 +134,12 @@ interface ITradeCoinComposition {
         State _newState
     ) external;
 
-    function splitProduct(uint256 _tokenId, uint256[] memory partitions)
-        external;
+    // function splitProduct(uint256 _tokenId, uint256[] memory partitions)
+    //     external;
 
-    function batchComposition(uint256[] memory _tokenIds) external;
+    // function batchComposition(uint256[] memory _tokenIds) external;
 
-    function addInformation(uint256 _tokenId) external;
-
-    function getIdsOfComposite(uint256 _tokenId)
+    function getIdsOfCommodities(uint256 _tokenId)
         external
         view
         returns (uint256[] memory);

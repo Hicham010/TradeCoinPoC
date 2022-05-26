@@ -298,7 +298,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
             cumulativeAmount,
             State.Created,
             tradeCoinCommodity[_tokenIds[0]].hashOfProperties,
-            msg.sender
+            tradeCoinCommodity[_tokenIds[0]].currentHandler
         );
 
         _burn(_tokenIds[0]);
