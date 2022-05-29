@@ -3,8 +3,7 @@ pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TradeCoinV4.sol";
 import "./RoleControl.sol";
-import "./interfaces/ITradeCoinComposition.sol";
-import "./interfaces/ITradeCoin.sol";
+import "./ITradeCoinComposition.sol";
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
@@ -43,8 +42,7 @@ contract TradeCoinCompositionV3 is
 
     function createComposition(
         string memory compositionName,
-        uint256[] memory tokenIdsOfTC,
-        address newHandler
+        uint256[] memory tokenIdsOfTC
     ) external override {
         require(
             tokenIdsOfTC.length > 1,
@@ -67,12 +65,6 @@ contract TradeCoinCompositionV3 is
             ) = tradeCoinV4.tradeCoinCommodity(tokenIdsOfTC[i]);
             require(uint8(stateOfProduct) == 7, "Commodity must be stored");
             totalAmount += amountOfTC;
-
-            tradeCoinV4.changeCurrentHandlerAndState(
-                tokenIdsOfTC[i],
-                address(0),
-                ITradeCoin.State.Stored
-            );
         }
 
         _mint(msg.sender, tokenCounter);
@@ -81,7 +73,7 @@ contract TradeCoinCompositionV3 is
             tokenIdsOfTC,
             totalAmount,
             State.Created,
-            newHandler
+            msg.sender
         );
 
         emit MintComposition(
@@ -120,8 +112,6 @@ contract TradeCoinCompositionV3 is
         uint256 _tokenIdComposition,
         uint256 _indexTokenIdTC
     ) external override {
-        require(ownerOf(_tokenIdComposition) == msg.sender, "Not the owner");
-
         uint256 lengthTokenIds = tradeCoinComposition[_tokenIdComposition]
             .tokenIdsOfTC
             .length;
@@ -154,7 +144,7 @@ contract TradeCoinCompositionV3 is
     }
 
     function decomposition(uint256 _tokenId) external override {
-        require(ownerOf(_tokenId) == msg.sender, "Not the owner");
+        require(ownerOf(_tokenId) == msg.sender, "You are not the owner");
 
         uint256[] memory productIds = tradeCoinComposition[_tokenId]
             .tokenIdsOfTC;
@@ -168,8 +158,8 @@ contract TradeCoinCompositionV3 is
         emit Decomposition(_tokenId, msg.sender, productIds);
     }
 
-    function burnComposition(uint256 _tokenId) public override {
-        require(ownerOf(_tokenId) == msg.sender, "Not the owner");
+    function burnComposition(uint256 _tokenId) public virtual {
+        require(ownerOf(_tokenId) == msg.sender);
         for (
             uint256 i;
             i < tradeCoinComposition[_tokenId].tokenIdsOfTC.length;
@@ -191,24 +181,10 @@ contract TradeCoinCompositionV3 is
     function addTransformation(
         uint256 _tokenId,
         string memory _transformationCode
-    ) external override onlyTransformationHandler isCurrentHandler(_tokenId) {
+    ) external override {
         emit CompositionTransformation(
             _tokenId,
             msg.sender,
-            _transformationCode
-        );
-    }
-
-    function addTransformationDecrease(
-        uint256 _tokenId,
-        string memory _transformationCode,
-        uint256 amountLoss
-    ) external override onlyTransformationHandler isCurrentHandler(_tokenId) {
-        tradeCoinComposition[_tokenId].cumulativeAmount -= amountLoss;
-        emit CompositionTransformationDecrease(
-            _tokenId,
-            msg.sender,
-            amountLoss,
             _transformationCode
         );
     }

@@ -1,8 +1,8 @@
 require("@nomiclabs/hardhat-waffle");
 require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-solhint");
-// require("hardhat-gas-reporter");
-// require("solidity-coverage");
+require("hardhat-gas-reporter");
+require("solidity-coverage");
 require("dotenv").config();
 
 // This is a sample Hardhat task. To learn how to create your own go to
@@ -29,11 +29,14 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 200,
+            runs: 9999999,
           },
         },
       },
     ],
+  },
+  mocha: {
+    parallel: true,
   },
   networks: {
     localhost: {
@@ -68,5 +71,11 @@ module.exports = {
     // gasPriceApi: "AB9S78WN3P8XD19I3YJZ7PRZVUCPWT7A5D",
     gasPrice: 40,
     coinmarketcap: process.env.COIN_MCAP_API_KEY,
+    excludeContracts: [
+      // "ComposableTC/TradeCoinTokenizerV2.sol",
+      //"ComposableTC/TradeCoinV4.sol",
+      "ComposableTC/RoleControl.sol",
+    ],
+    rst: true,
   },
 };

@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./interfaces/ITradeCoinTokenizer.sol";
+import "./ITradeCoinTokenizer.sol";
 
 contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
     uint256 public tokenCounter;
@@ -28,8 +28,6 @@ contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
             _unit
         );
         _mint(msg.sender, tokenCounter);
-
-        emit MintToken(tokenCounter, msg.sender, _commodity, _amount, _unit);
 
         tokenCounter += 1;
     }

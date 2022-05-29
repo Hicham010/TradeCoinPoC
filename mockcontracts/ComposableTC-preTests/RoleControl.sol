@@ -29,7 +29,7 @@ contract RoleControl is AccessControl {
     // Create a modifier that can be used in other contract to make a pre-check
     // That makes sure that the sender of the transaction (msg.sender)  is a admin
     modifier onlyAdmin() {
-        require(isAdmin(msg.sender), "Restricted to admins");
+        require(isAdmin(msg.sender), "Restricted to admins.");
         _;
     }
 
@@ -52,7 +52,7 @@ contract RoleControl is AccessControl {
     // Create a modifier that can be used in other contract to make a pre-check
     // That makes sure that the sender of the transaction (msg.sender) is a admin or Tokenizer
     modifier onlyTokenizer() {
-        require(isTokenizer(msg.sender), "Restricted to Tokenizers and admin");
+        require(isTokenizer(msg.sender), "Restricted to FTokenizer or admins.");
         _;
     }
 
@@ -81,7 +81,7 @@ contract RoleControl is AccessControl {
     modifier onlyTransformationHandler() {
         require(
             isTransformationHandler(msg.sender),
-            "Restricted to Transformation Handlers or admins"
+            "Restricted to ProductHandlers or admins."
         );
         _;
     }
@@ -107,7 +107,7 @@ contract RoleControl is AccessControl {
     modifier onlyInformationHandler() {
         require(
             isInformationHandler(msg.sender),
-            "Restricted to Information Handlers or admins"
+            "Restricted to InformationHandlers or admins."
         );
         _;
     }

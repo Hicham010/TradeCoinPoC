@@ -3,7 +3,7 @@ pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TradeCoinTokenizerV2.sol";
 import "./RoleControl.sol";
-import "./interfaces/ITradeCoin.sol";
+import "./ITradeCoin.sol";
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
@@ -38,10 +38,11 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         _;
     }
 
-    constructor(address _tradeCoinTokenizerV2)
-        ERC721("TradeCoinV4", "TCT4")
-        RoleControl(msg.sender)
-    {
+    constructor(
+        string memory _name,
+        string memory _symbol,
+        address _tradeCoinTokenizerV2
+    ) ERC721(_name, _symbol) RoleControl(msg.sender) {
         tradeCoinTokenizerV2 = TradeCoinTokenizerV2(_tradeCoinTokenizerV2);
     }
 
@@ -84,18 +85,20 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         override
     {
         require(
-            commoditySaleQueue[tokenIdOfTokenizer].priceInWei == msg.value,
+            commoditySaleQueue[tokenIdOfTokenizer].isPaid &&
+                commoditySaleQueue[tokenIdOfTokenizer].priceInWei == msg.value,
             "Not enough Ether"
         );
-        require(
-            !commoditySaleQueue[tokenIdOfTokenizer].isPaid,
-            "Token is already paid for"
-        );
+        assert(address(this).balance == contractWeiBalance);
 
         commoditySaleQueue[tokenIdOfTokenizer].isPaid = true;
         contractWeiBalance += msg.value;
 
-        emit PaymentOfToken(tokenIdOfTokenizer, msg.sender, msg.value);
+        emit PaymentOfToken(
+            tokenIdOfTokenizer,
+            msg.sender,
+            commoditySaleQueue[tokenIdOfTokenizer].priceInWei
+        );
     }
 
     function mintCommodity(uint256 tokenIdOfTokenizer)
@@ -169,7 +172,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
     function addTransformation(uint256 _tokenId, string memory transformation)
         external
         override
-        onlyTransformationHandler
+        onlyInformationHandler
         isCurrentHandler(_tokenId)
     {
         tradeCoinCommodity[_tokenId].hashOfProperties = keccak256(
@@ -182,7 +185,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         emit CommodityTransformation(_tokenId, msg.sender, transformation);
     }
 
-    function addTransformationDecrease(
+    function addTransformation(
         uint256 _tokenId,
         string memory transformation,
         uint256 amountDecrease
@@ -196,7 +199,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
             )
         );
 
-        emit CommodityTransformationDecrease(
+        emit CommodityTransformation(
             _tokenId,
             msg.sender,
             transformation,
@@ -256,7 +259,6 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
 
     function batchCommodities(uint256[] memory _tokenIds) external override {
         require(ownerOf(_tokenIds[0]) == msg.sender, "Not the owner");
-        require(_tokenIds.length > 1, "Length of array must be greater than 1");
         bytes32 hashOfCommodity = keccak256(
             abi.encode(
                 TradeCoinCommodity(
@@ -312,15 +314,15 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         override
     {
         require(ownerOf(_tokenId) == msg.sender, "Not the owner");
-        require(partitions.length > 1, "Length of array must be bigger than 1");
+        require(partitions.length > 1, "Length of array must be bigger then 1");
         uint256 cumulativeAmountPartitions;
         for (uint256 i; i < partitions.length; i++) {
-            require(partitions[i] != 0, "Partition can't be 0");
+            require(partitions[i] != 0, "Partitiona amount can't be 0");
             cumulativeAmountPartitions += partitions[i];
         }
         require(
             tradeCoinCommodity[_tokenId].amount == cumulativeAmountPartitions,
-            "The amounts don't add up"
+            "The amounts to add up"
         );
 
         _burn(_tokenId);
@@ -332,7 +334,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
                 partitions[i],
                 State.Created,
                 tradeCoinCommodity[_tokenId].hashOfProperties,
-                tradeCoinCommodity[_tokenId].currentHandler
+                msg.sender
             );
             newTokens[i] = tokenCounter;
             tokenCounter += 1;
