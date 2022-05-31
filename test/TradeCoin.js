@@ -161,7 +161,7 @@ describe("Testing the tradecoin contract", function () {
         .to.emit(tradeCoin, "InitializeSale")
         .withArgs(0, tokenizer.address, owner.address, 0, true);
 
-      [seller, newOwner, handler, price, isPaid] = await tradeCoin
+      [seller, newOwner, handler, isPaid, price] = await tradeCoin
         .connect(tokenizer)
         .commoditySaleQueue(0);
 
@@ -229,14 +229,18 @@ describe("Testing the tradecoin contract", function () {
       expect(hashOfProperties).is.not.empty;
       expect(currentHandler).to.be.equal(tHandler.address);
 
-      [seller, newOwner, handler, price, isPaid] =
-        await tradeCoin.commoditySaleQueue(0);
+      await expect(tradeCoinTokenizer.ownerOf(0)).to.be.revertedWith(
+        "ERC721: owner query for nonexistent token"
+      );
 
-      expect(seller).to.be.equal(address0);
-      expect(newOwner).to.be.equal(address0);
-      expect(handler).to.be.equal(address0);
-      expect(0).to.be.equal(0);
-      expect(!isPaid);
+      // [seller, newOwner, handler, price, isPaid] =
+      //   await tradeCoin.commoditySaleQueue(0);
+
+      // expect(seller).to.be.equal(address0);
+      // expect(newOwner).to.be.equal(address0);
+      // expect(handler).to.be.equal(address0);
+      // expect(0).to.be.equal(0);
+      // expect(!isPaid);
     });
 
     it("Should revert: wrong type handler mints the commodity", async function () {
@@ -268,7 +272,7 @@ describe("Testing the tradecoin contract", function () {
         .connect(tokenizer)
         .initializeSale(owner.address, tHandler.address, 0, 1000);
 
-      [seller, newOwner, handler, price, isPaid] = await tradeCoin
+      [seller, newOwner, handler, isPaid, price] = await tradeCoin
         .connect(tokenizer)
         .commoditySaleQueue(0);
 
@@ -289,7 +293,7 @@ describe("Testing the tradecoin contract", function () {
 
       await tradeCoin.connect(owner).paymentOfToken(0, { value: 1000 });
 
-      [seller, newOwner, handler, price, isPaid] =
+      [seller, newOwner, handler, isPaid, price] =
         await tradeCoin.commoditySaleQueue(0);
 
       expect(seller).to.be.equal(tokenizer.address);
@@ -525,10 +529,8 @@ describe("Testing the tradecoin contract", function () {
   });
 
   describe("Testing the supports interface function", function () {
-    it("Calling the supports Interface function", async function () {
-      isSupported = await tradeCoin.supportsInterface("0x0a00aaff");
-
-      expect(!isSupported);
+    it("Should support the ITradeCoin interface", async function () {
+      expect(await tradeCoin.supportsInterface("0x39af4a6b")).to.be.true;
     });
   });
 

@@ -2,19 +2,6 @@
 pragma solidity ^0.8.4;
 
 interface ITradeCoinTokenizer {
-    event InitializeSaleInCrypto(
-        uint256 indexed tokenId,
-        address indexed tokenizer,
-        address indexed owner,
-        uint256 priceInWei
-    );
-
-    event InitializeSaleInFiat(
-        uint256 indexed tokenId,
-        address indexed tokenizer,
-        address indexed owner
-    );
-
     event MintToken(
         uint256 indexed tokenId,
         address indexed tokenizer,
@@ -28,9 +15,9 @@ interface ITradeCoinTokenizer {
     event DecreaseCommodity(uint256 indexed tokenId, uint256 amountDecrease);
 
     function mintToken(
-        string memory _commodity,
+        string calldata _commodity,
         uint256 _amount,
-        string memory _unit
+        string calldata _unit
     ) external;
 
     function increaseAmount(uint256 tokenId, uint256 amountIncrease) external;

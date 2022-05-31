@@ -359,6 +359,8 @@ contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
         override(ERC721, AccessControl)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return
+            type(ITradeCoin).interfaceId == interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 }

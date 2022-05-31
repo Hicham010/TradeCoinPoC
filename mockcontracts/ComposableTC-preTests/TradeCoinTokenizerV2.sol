@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./ITradeCoinTokenizer.sol";
+import "../interfaces/ITradeCoinTokenizer.sol";
 
 contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
     uint256 public tokenCounter;
@@ -63,5 +63,16 @@ contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
         );
         delete tradeCoinToken[tokenId];
         _burn(tokenId);
+    }
+
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        override(ERC721)
+        returns (bool)
+    {
+        return
+            type(ITradeCoinTokenizer).interfaceId == interfaceId ||
+            super.supportsInterface(interfaceId);
     }
 }

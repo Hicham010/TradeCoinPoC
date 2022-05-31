@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "./interfaces/ITradeCoinTokenizer.sol";
+import "../interfaces/ITradeCoinTokenizer.sol";
 
 contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
     uint256 public tokenCounter;
@@ -31,47 +31,39 @@ contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
 
         emit MintToken(tokenCounter, msg.sender, _commodity, _amount, _unit);
 
-        unchecked {
-            tokenCounter += 1;
-        }
+        tokenCounter += 1;
     }
 
     function increaseAmount(uint256 tokenId, uint256 amountIncrease)
         external
         override
     {
-        require(ownerOf(tokenId) == msg.sender, "Not the owner");
-        unchecked {
-            tradeCoinToken[tokenId].amount += amountIncrease;
-        }
-        // emit IncreaseCommodity(tokenId, amountIncrease);
+        require(
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "Caller is not owner nor approved"
+        );
+        tradeCoinToken[tokenId].amount += amountIncrease;
+        emit IncreaseCommodity(tokenId, amountIncrease);
     }
 
     function decreaseAmount(uint256 tokenId, uint256 amountDecrease)
         external
         override
     {
-        require(ownerOf(tokenId) == msg.sender, "Not the owner");
-        unchecked {
-            tradeCoinToken[tokenId].amount -= amountDecrease;
-        }
-        // emit DecreaseCommodity(tokenId, amountDecrease);
+        require(
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "Caller is not owner nor approved"
+        );
+        tradeCoinToken[tokenId].amount -= amountDecrease;
+        emit DecreaseCommodity(tokenId, amountDecrease);
     }
 
     function burnToken(uint256 tokenId) external override {
-        require(ownerOf(tokenId) == msg.sender, "Not the owner");
-        // delete tradeCoinToken[tokenId];
+        require(
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "caller is not owner nor approved"
+        );
+        delete tradeCoinToken[tokenId];
         _burn(tokenId);
-    }
-
-    function supportsInterface(bytes4 interfaceId)
-        public
-        view
-        override(ERC721)
-        returns (bool)
-    {
-        return
-            type(ITradeCoinTokenizer).interfaceId == interfaceId ||
-            super.supportsInterface(interfaceId);
     }
 }

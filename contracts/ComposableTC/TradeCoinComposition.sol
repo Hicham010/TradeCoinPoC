@@ -6,16 +6,9 @@ import "./RoleControl.sol";
 import "./interfaces/ITradeCoinComposition.sol";
 import "./interfaces/ITradeCoin.sol";
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
-
-contract TradeCoinCompositionV3 is
-    ERC721,
-    RoleControl,
-    ReentrancyGuard,
-    ITradeCoinComposition
-{
+contract TradeCoinCompositionV3 is ERC721, RoleControl, ITradeCoinComposition {
     uint256 public tokenCounter;
-    TradeCoinV4 public tradeCoinV4;
+    TradeCoinV4 public immutable tradeCoinV4;
 
     struct Composition {
         uint256[] tokenIdsOfTC;
@@ -42,17 +35,17 @@ contract TradeCoinCompositionV3 is
     }
 
     function createComposition(
-        string memory compositionName,
-        uint256[] memory tokenIdsOfTC,
+        string calldata compositionName,
+        uint256[] calldata tokenIdsOfTC,
         address newHandler
     ) external override {
         require(
             tokenIdsOfTC.length > 1,
-            "You can't make a composition of less then 2 tokens"
+            "Composition must be more than 2 tokens"
         );
 
         uint256 totalAmount;
-        for (uint256 i; i < tokenIdsOfTC.length; i++) {
+        for (uint256 i; i < tokenIdsOfTC.length; ) {
             tradeCoinV4.transferFrom(
                 msg.sender,
                 address(this),
@@ -66,13 +59,16 @@ contract TradeCoinCompositionV3 is
 
             ) = tradeCoinV4.tradeCoinCommodity(tokenIdsOfTC[i]);
             require(uint8(stateOfProduct) == 7, "Commodity must be stored");
-            totalAmount += amountOfTC;
 
             tradeCoinV4.changeCurrentHandlerAndState(
                 tokenIdsOfTC[i],
                 address(0),
                 ITradeCoin.State.Stored
             );
+            unchecked {
+                ++i;
+                totalAmount += amountOfTC;
+            }
         }
 
         _mint(msg.sender, tokenCounter);
@@ -91,8 +87,9 @@ contract TradeCoinCompositionV3 is
             compositionName,
             totalAmount
         );
-
-        tokenCounter += 1;
+        unchecked {
+            tokenCounter += 1;
+        }
     }
 
     function appendCommodityToComposition(
@@ -106,8 +103,10 @@ contract TradeCoinCompositionV3 is
         tradeCoinComposition[_tokenIdComposition].tokenIdsOfTC.push(_tokenIdTC);
 
         (uint256 amountOfTC, , , ) = tradeCoinV4.tradeCoinCommodity(_tokenIdTC);
-        tradeCoinComposition[_tokenIdComposition]
-            .cumulativeAmount += amountOfTC;
+        unchecked {
+            tradeCoinComposition[_tokenIdComposition]
+                .cumulativeAmount += amountOfTC;
+        }
 
         emit AppendCommodityToComposition(
             _tokenIdComposition,
@@ -126,7 +125,7 @@ contract TradeCoinCompositionV3 is
             .tokenIdsOfTC
             .length;
 
-        require(lengthTokenIds > 2, "Can't remove token from composition");
+        require(lengthTokenIds > 2, "Must contain at least 2 tokens");
         require((lengthTokenIds - 1) >= _indexTokenIdTC, "Index not in range");
 
         uint256 tokenIdTC = tradeCoinComposition[_tokenIdComposition]
@@ -143,8 +142,10 @@ contract TradeCoinCompositionV3 is
         tradeCoinComposition[_tokenIdComposition].tokenIdsOfTC.pop();
 
         (uint256 amountOfTC, , , ) = tradeCoinV4.tradeCoinCommodity(tokenIdTC);
-        tradeCoinComposition[_tokenIdComposition]
-            .cumulativeAmount -= amountOfTC;
+        unchecked {
+            tradeCoinComposition[_tokenIdComposition]
+                .cumulativeAmount -= amountOfTC;
+        }
 
         emit RemoveCommodityFromComposition(
             _tokenIdComposition,
@@ -158,11 +159,14 @@ contract TradeCoinCompositionV3 is
 
         uint256[] memory productIds = tradeCoinComposition[_tokenId]
             .tokenIdsOfTC;
-        for (uint256 i; i < productIds.length; i++) {
+        for (uint256 i; i < productIds.length; ) {
             tradeCoinV4.transferFrom(address(this), msg.sender, productIds[i]);
+            unchecked {
+                ++i;
+            }
         }
 
-        delete tradeCoinComposition[_tokenId];
+        // delete tradeCoinComposition[_tokenId];
         _burn(_tokenId);
 
         emit Decomposition(_tokenId, msg.sender, productIds);
@@ -170,27 +174,23 @@ contract TradeCoinCompositionV3 is
 
     function burnComposition(uint256 _tokenId) public override {
         require(ownerOf(_tokenId) == msg.sender, "Not the owner");
-        for (
-            uint256 i;
-            i < tradeCoinComposition[_tokenId].tokenIdsOfTC.length;
-            i++
-        ) {
-            tradeCoinV4.burnCommodity(
-                tradeCoinComposition[_tokenId].tokenIdsOfTC[i]
-            );
+        uint256[] memory commodityIds = tradeCoinComposition[_tokenId]
+            .tokenIdsOfTC;
+        for (uint256 i; i < commodityIds.length; ) {
+            tradeCoinV4.burnCommodity(commodityIds[i]);
+            unchecked {
+                ++i;
+            }
         }
-        emit BurnComposition(
-            _tokenId,
-            msg.sender,
-            tradeCoinComposition[_tokenId].tokenIdsOfTC
-        );
+        emit BurnComposition(_tokenId, msg.sender, commodityIds);
+
+        // delete tradeCoinComposition[_tokenId];
         _burn(_tokenId);
-        delete tradeCoinComposition[_tokenId];
     }
 
     function addTransformation(
         uint256 _tokenId,
-        string memory _transformationCode
+        string calldata _transformationCode
     ) external override onlyTransformationHandler isCurrentHandler(_tokenId) {
         emit CompositionTransformation(
             _tokenId,
@@ -201,7 +201,7 @@ contract TradeCoinCompositionV3 is
 
     function addTransformationDecrease(
         uint256 _tokenId,
-        string memory _transformationCode,
+        string calldata _transformationCode,
         uint256 amountLoss
     ) external override onlyTransformationHandler isCurrentHandler(_tokenId) {
         tradeCoinComposition[_tokenId].cumulativeAmount -= amountLoss;
@@ -213,7 +213,7 @@ contract TradeCoinCompositionV3 is
         );
     }
 
-    function addInformationToComposition(uint256 _tokenId, string memory data)
+    function addInformationToComposition(uint256 _tokenId, string calldata data)
         external
         override
         onlyInformationHandler
@@ -222,7 +222,7 @@ contract TradeCoinCompositionV3 is
         emit AddInformation(_tokenId, msg.sender, data);
     }
 
-    function checkQualityOfComposition(uint256 _tokenId, string memory data)
+    function checkQualityOfComposition(uint256 _tokenId, string calldata data)
         external
         override
         onlyInformationHandler
@@ -266,9 +266,9 @@ contract TradeCoinCompositionV3 is
         external
         view
         override
-        returns (uint256[] memory)
+        returns (uint256[] memory tokenIds)
     {
-        return tradeCoinComposition[_tokenId].tokenIdsOfTC;
+        tokenIds = tradeCoinComposition[_tokenId].tokenIdsOfTC;
     }
 
     function supportsInterface(bytes4 interfaceId)
@@ -277,165 +277,8 @@ contract TradeCoinCompositionV3 is
         override(ERC721, AccessControl)
         returns (bool)
     {
-        return super.supportsInterface(interfaceId);
+        return
+            type(ITradeCoinComposition).interfaceId == interfaceId ||
+            super.supportsInterface(interfaceId);
     }
-
-    // function splitProduct(uint256 _tokenId, uint256[] memory partitions)
-    //     external
-    //     override
-    // {
-    //     require(
-    //         partitions.length <= 3 && partitions.length > 1,
-    //         "Token should be split to 2 or more new tokens, we limit the max to 3."
-    //     );
-    //     // create temp list of tokenIds
-    //     uint256[] memory tempArray = new uint256[](partitions.length + 1);
-    //     tempArray[0] = _tokenId;
-    //     // create temp struct
-    //     Composition memory temporaryStruct = tradeCoinComposition[_tokenId];
-
-    //     uint256 sumPartitions;
-    //     for (uint256 x; x < partitions.length; x++) {
-    //         require(partitions[x] != 0, "Partitions can't be 0");
-    //         sumPartitions += partitions[x];
-    //     }
-
-    //     require(
-    //         tradeCoinComposition[_tokenId].cumulativeAmount == sumPartitions,
-    //         "The given amount of partitions do not equal total weight amount."
-    //     );
-
-    //     burnComposition(_tokenId);
-    //     for (uint256 i; i < partitions.length; i++) {
-    //         mintAfterSplitOrBatch(
-    //             temporaryStruct.tokenIdsOfTC,
-    //             // temporaryStruct.compositionName,
-    //             partitions[i],
-    //             temporaryStruct.state,
-    //             temporaryStruct.currentHandler
-    //             // temporaryStruct.transformations
-    //         );
-    //         tempArray[i + 1] = tokenCounter;
-    //     }
-
-    //     emit SplitComposition(_tokenId, msg.sender, tempArray);
-    //     delete temporaryStruct;
-    // }
-
-    // function batchComposition(uint256[] memory _tokenIds) external override {
-    //     require(
-    //         _tokenIds.length > 1 && _tokenIds.length <= 3,
-    //         "Maximum batch: 3, minimum: 2"
-    //     );
-
-    //     // bytes32 emptyHash;
-    //     uint256 cumulativeWeight;
-    //     uint256[] memory tokenIdsEmpty;
-    //     Composition memory short = Composition(
-    //         tokenIdsEmpty,
-    //         0,
-    //         State.Created,
-    //         "",
-    //         tradeCoinComposition[_tokenIds[0]].currentHandler
-    //     );
-
-    //     bytes32 hashed = keccak256(abi.encode(short));
-
-    //     uint256[] memory tempArray = new uint256[](_tokenIds.length + 1);
-
-    //     uint256[] memory collectiveProductIds = new uint256[](
-    //         tradeCoinComposition[_tokenIds[0]].tokenIdsOfTC.length +
-    //             tradeCoinComposition[_tokenIds[1]].tokenIdsOfTC.length
-    //     );
-
-    //     collectiveProductIds = concatenateArrays(
-    //         tradeCoinComposition[_tokenIds[0]].tokenIdsOfTC,
-    //         tradeCoinComposition[_tokenIds[0]].tokenIdsOfTC
-    //     );
-
-    //     for (uint256 tokenId; tokenId < _tokenIds.length; tokenId++) {
-    //         require(
-    //             ownerOf(_tokenIds[tokenId]) == msg.sender,
-    //             "Unauthorized: The tokens do not have the same owner."
-    //         );
-    //         require(
-    //             tradeCoinComposition[_tokenIds[tokenId]].state !=
-    //                 State.NonExistent,
-    //             "Unauthorized: The tokens are not in the right state."
-    //         );
-    //         Composition memory short2 = Composition(
-    //             tokenIdsEmpty,
-    //             0,
-    //             tradeCoinComposition[_tokenIds[tokenId]].state,
-    //             "",
-    //             tradeCoinComposition[_tokenIds[tokenId]].currentHandler
-    //         );
-    //         require(
-    //             hashed == keccak256(abi.encode(short2)),
-    //             "This should be the same hash, one of the fields in the NFT don't match"
-    //         );
-
-    //         tempArray[tokenId] = _tokenIds[tokenId];
-    //         // create temp struct
-    //         cumulativeWeight += tradeCoinComposition[_tokenIds[tokenId]]
-    //             .cumulativeAmount;
-    //         burnComposition(_tokenIds[tokenId]);
-    //         delete tradeCoinComposition[_tokenIds[tokenId]];
-    //     }
-    //     mintAfterSplitOrBatch(
-    //         collectiveProductIds,
-    //         // short.compositionName,
-    //         cumulativeWeight,
-    //         short.state,
-    //         short.currentHandler
-    //         // short.transformations
-    //     );
-    //     tempArray[_tokenIds.length] = tokenCounter;
-
-    //     emit BatchComposition(msg.sender, tempArray);
-    // }
-
-    // function mintAfterSplitOrBatch(
-    //     uint256[] memory _tokenIdsOfProduct,
-    //     uint256 _weight,
-    //     State _state,
-    //     address currentHandler
-    // ) internal {
-    //     require(_weight != 0, "Weight can't be 0");
-
-    //     uint256 id = tokenCounter;
-
-    //     _safeMint(msg.sender, id);
-
-    //     tradeCoinComposition[id] = Composition(
-    //         _tokenIdsOfProduct,
-    //         _weight,
-    //         _state,
-    //         "",
-    //         currentHandler
-    //     );
-
-    //     tokenCounter += 1;
-    // }
-
-    // function concatenateArrays(
-    //     uint256[] memory accounts,
-    //     uint256[] memory accounts2
-    // ) internal pure returns (uint256[] memory) {
-    //     uint256[] memory returnArr = new uint256[](
-    //         accounts.length + accounts2.length
-    //     );
-
-    //     uint256 i = 0;
-    //     for (; i < accounts.length; i++) {
-    //         returnArr[i] = accounts[i];
-    //     }
-
-    //     uint256 j = 0;
-    //     while (j < accounts.length) {
-    //         returnArr[i++] = accounts2[j++];
-    //     }
-
-    //     return returnArr;
-    // }
 }

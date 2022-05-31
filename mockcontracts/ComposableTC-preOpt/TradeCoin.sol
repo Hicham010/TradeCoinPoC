@@ -2,17 +2,20 @@
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TradeCoinTokenizerV2.sol";
-import "./RoleControl.sol";
-import "./interfaces/ITradeCoin.sol";
+import "../RoleControl.sol";
+import "../interfaces/ITradeCoin.sol";
 
-contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+contract TradeCoinV4 is ERC721, RoleControl, ReentrancyGuard, ITradeCoin {
     uint256 public tokenCounter;
-    TradeCoinTokenizerV2 public tradeCoinTokenizer;
+    uint256 public contractWeiBalance;
+    TradeCoinTokenizerV2 public tradeCoinTokenizerV2;
 
     struct TradeCoinCommodity {
         uint256 amount;
         State state;
-        bytes4 hashOfProperties;
+        bytes32 hashOfProperties;
         address currentHandler;
     }
 
@@ -20,8 +23,8 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         address seller;
         address owner;
         address handler;
-        bool isPaid;
         uint256 priceInWei;
+        bool isPaid;
     }
 
     mapping(uint256 => TradeCoinCommodity) public tradeCoinCommodity;
@@ -35,11 +38,11 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         _;
     }
 
-    constructor(address _tradeCoinTokenizer)
+    constructor(address _tradeCoinTokenizerV2)
         ERC721("TradeCoinV4", "TCT4")
         RoleControl(msg.sender)
     {
-        tradeCoinTokenizer = TradeCoinTokenizerV2(_tradeCoinTokenizer);
+        tradeCoinTokenizerV2 = TradeCoinTokenizerV2(_tradeCoinTokenizerV2);
     }
 
     function initializeSale(
@@ -49,10 +52,10 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         uint256 priceInWei
     ) external override onlyTokenizer {
         require(
-            tradeCoinTokenizer.ownerOf(tokenIdOfTokenizer) == msg.sender,
+            tradeCoinTokenizerV2.ownerOf(tokenIdOfTokenizer) == msg.sender,
             "Not the owner"
         );
-        tradeCoinTokenizer.transferFrom(
+        tradeCoinTokenizerV2.transferFrom(
             msg.sender,
             address(this),
             tokenIdOfTokenizer
@@ -62,8 +65,8 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
             msg.sender,
             owner,
             handler,
-            priceInWei == 0,
-            priceInWei
+            priceInWei,
+            priceInWei == 0
         );
 
         emit InitializeSale(
@@ -88,7 +91,9 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
             !commoditySaleQueue[tokenIdOfTokenizer].isPaid,
             "Token is already paid for"
         );
+
         commoditySaleQueue[tokenIdOfTokenizer].isPaid = true;
+        contractWeiBalance += msg.value;
 
         emit PaymentOfToken(tokenIdOfTokenizer, msg.sender, msg.value);
     }
@@ -98,16 +103,23 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         override
         onlyTransformationHandler
     {
-        CommoditySale memory _sale = commoditySaleQueue[tokenIdOfTokenizer];
-        require(_sale.isPaid, "Not payed for yet");
-        require(_sale.handler == msg.sender, "Not a handler");
+        require(
+            commoditySaleQueue[tokenIdOfTokenizer].isPaid,
+            "Not payed for yet"
+        );
+        require(
+            commoditySaleQueue[tokenIdOfTokenizer].handler == msg.sender,
+            "Not a handler"
+        );
 
-        if (!(_sale.priceInWei == 0)) {
-            payable(_sale.seller).transfer(_sale.priceInWei);
+        if (!(commoditySaleQueue[tokenIdOfTokenizer].priceInWei == 0)) {
+            payable(commoditySaleQueue[tokenIdOfTokenizer].seller).transfer(
+                commoditySaleQueue[tokenIdOfTokenizer].priceInWei
+            );
         }
-        _mint(_sale.owner, tokenCounter);
+        _mint(commoditySaleQueue[tokenIdOfTokenizer].owner, tokenCounter);
 
-        (bytes4 hashOfProperties, uint256 amount) = emitTokenData(
+        (bytes32 hashOfProperties, uint256 amount) = emitTokenData(
             tokenIdOfTokenizer
         );
 
@@ -118,25 +130,27 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
             msg.sender
         );
 
-        tradeCoinTokenizer.burnToken(tokenIdOfTokenizer);
+        tradeCoinTokenizerV2.burnToken(tokenIdOfTokenizer);
 
-        emit CompleteSale(tokenCounter, _sale.seller, msg.sender);
+        emit CompleteSale(
+            tokenCounter,
+            commoditySaleQueue[tokenIdOfTokenizer].seller,
+            msg.sender
+        );
 
-        // delete commoditySaleQueue[tokenIdOfTokenizer];
-        unchecked {
-            tokenCounter += 1;
-        }
+        delete commoditySaleQueue[tokenIdOfTokenizer];
+        tokenCounter += 1;
     }
 
     function emitTokenData(uint256 tokenIdOfTokenizer)
         internal
-        returns (bytes4, uint256)
+        returns (bytes32, uint256)
     {
         (
             string memory commodity,
             uint256 amount,
             string memory unit
-        ) = tradeCoinTokenizer.tradeCoinToken(tokenIdOfTokenizer);
+        ) = tradeCoinTokenizerV2.tradeCoinToken(tokenIdOfTokenizer);
 
         emit MintCommodity(
             tokenCounter,
@@ -149,35 +163,38 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
 
         emit CommodityTransformation(tokenCounter, msg.sender, "raw");
 
-        return (
-            bytes4(keccak256(abi.encodePacked(commodity, unit, "raw"))),
-            amount
-        );
+        return (keccak256(abi.encodePacked(commodity, unit, "raw")), amount);
     }
 
-    function addTransformation(uint256 _tokenId, string calldata transformation)
+    function addTransformation(uint256 _tokenId, string memory transformation)
         external
         override
         onlyTransformationHandler
         isCurrentHandler(_tokenId)
     {
-        tradeCoinCommodity[_tokenId].hashOfProperties =
-            tradeCoinCommodity[_tokenId].hashOfProperties ^
-            bytes4(keccak256(abi.encodePacked(transformation)));
+        tradeCoinCommodity[_tokenId].hashOfProperties = keccak256(
+            abi.encodePacked(
+                tradeCoinCommodity[_tokenId].hashOfProperties,
+                transformation
+            )
+        );
 
         emit CommodityTransformation(_tokenId, msg.sender, transformation);
     }
 
     function addTransformationDecrease(
         uint256 _tokenId,
-        string calldata transformation,
+        string memory transformation,
         uint256 amountDecrease
     ) external override onlyTransformationHandler isCurrentHandler(_tokenId) {
         tradeCoinCommodity[_tokenId].amount -= amountDecrease;
 
-        tradeCoinCommodity[_tokenId].hashOfProperties =
-            tradeCoinCommodity[_tokenId].hashOfProperties ^
-            bytes4(keccak256(abi.encodePacked(transformation)));
+        tradeCoinCommodity[_tokenId].hashOfProperties = keccak256(
+            abi.encodePacked(
+                tradeCoinCommodity[_tokenId].hashOfProperties,
+                transformation
+            )
+        );
 
         emit CommodityTransformationDecrease(
             _tokenId,
@@ -204,7 +221,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         );
     }
 
-    function addInformationToCommodity(uint256 _tokenId, string calldata data)
+    function addInformationToCommodity(uint256 _tokenId, string memory data)
         external
         override
         onlyInformationHandler
@@ -213,7 +230,7 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         emit AddInformation(_tokenId, msg.sender, data);
     }
 
-    function checkQualityOfCommodity(uint256 _tokenId, string calldata data)
+    function checkQualityOfCommodity(uint256 _tokenId, string memory data)
         external
         override
         onlyInformationHandler
@@ -237,36 +254,41 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         );
     }
 
-    function batchCommodities(uint256[] calldata _tokenIds) external override {
+    function batchCommodities(uint256[] memory _tokenIds) external override {
         require(ownerOf(_tokenIds[0]) == msg.sender, "Not the owner");
         require(_tokenIds.length > 1, "Length of array must be greater than 1");
         bytes32 hashOfCommodity = keccak256(
-            abi.encodePacked(
-                tradeCoinCommodity[_tokenIds[0]].state,
-                tradeCoinCommodity[_tokenIds[0]].hashOfProperties
+            abi.encode(
+                TradeCoinCommodity(
+                    0,
+                    tradeCoinCommodity[_tokenIds[0]].state,
+                    tradeCoinCommodity[_tokenIds[0]].hashOfProperties,
+                    address(0)
+                )
             )
         );
 
         uint256 cumulativeAmount = tradeCoinCommodity[_tokenIds[0]].amount;
 
-        for (uint256 i = 1; i < _tokenIds.length; ) {
+        for (uint256 i = 1; i < _tokenIds.length; i++) {
             require(ownerOf(_tokenIds[i]) == msg.sender, "Not the owner");
             bytes32 hashOfiProduct = keccak256(
-                abi.encodePacked(
-                    tradeCoinCommodity[_tokenIds[i]].state,
-                    tradeCoinCommodity[_tokenIds[i]].hashOfProperties
+                abi.encode(
+                    TradeCoinCommodity(
+                        0,
+                        tradeCoinCommodity[_tokenIds[i]].state,
+                        tradeCoinCommodity[_tokenIds[i]].hashOfProperties,
+                        address(0)
+                    )
                 )
             );
+            cumulativeAmount += tradeCoinCommodity[_tokenIds[i]].amount;
             require(
                 hashOfiProduct == hashOfCommodity,
                 "Properties don't match"
             );
             _burn(_tokenIds[i]);
-            // delete tradeCoinCommodity[_tokenIds[i]];
-            unchecked {
-                cumulativeAmount += tradeCoinCommodity[_tokenIds[i]].amount;
-                ++i;
-            }
+            delete tradeCoinCommodity[_tokenIds[i]];
         }
 
         _mint(msg.sender, tokenCounter);
@@ -278,26 +300,23 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         );
 
         _burn(_tokenIds[0]);
-        // delete tradeCoinCommodity[_tokenIds[0]];
+        delete tradeCoinCommodity[_tokenIds[0]];
 
         emit BatchCommodities(tokenCounter, msg.sender, _tokenIds);
 
         tokenCounter += 1;
     }
 
-    function splitCommodity(uint256 _tokenId, uint256[] calldata partitions)
+    function splitCommodity(uint256 _tokenId, uint256[] memory partitions)
         external
         override
     {
         require(ownerOf(_tokenId) == msg.sender, "Not the owner");
         require(partitions.length > 1, "Length of array must be bigger than 1");
         uint256 cumulativeAmountPartitions;
-        for (uint256 i; i < partitions.length; ) {
+        for (uint256 i; i < partitions.length; i++) {
             require(partitions[i] != 0, "Partition can't be 0");
             cumulativeAmountPartitions += partitions[i];
-            unchecked {
-                ++i;
-            }
         }
         require(
             tradeCoinCommodity[_tokenId].amount == cumulativeAmountPartitions,
@@ -305,29 +324,20 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         );
 
         _burn(_tokenId);
-
         uint256[] memory newTokens = new uint256[](partitions.length);
-        bytes4 _hashOfProperties = tradeCoinCommodity[_tokenId]
-            .hashOfProperties;
-        address _currentHandler = tradeCoinCommodity[_tokenId].currentHandler;
-        uint256 _tokenCounter = tokenCounter;
 
-        for (uint256 i; i < partitions.length; ) {
-            _mint(msg.sender, _tokenCounter);
-            tradeCoinCommodity[_tokenCounter] = TradeCoinCommodity(
+        for (uint256 i; i < partitions.length; i++) {
+            _mint(msg.sender, tokenCounter);
+            tradeCoinCommodity[tokenCounter] = TradeCoinCommodity(
                 partitions[i],
                 State.Created,
-                _hashOfProperties,
-                _currentHandler
+                tradeCoinCommodity[_tokenId].hashOfProperties,
+                tradeCoinCommodity[_tokenId].currentHandler
             );
-            newTokens[i] = _tokenCounter;
-            unchecked {
-                ++i;
-                _tokenCounter += 1;
-            }
+            newTokens[i] = tokenCounter;
+            tokenCounter += 1;
         }
-        tokenCounter = _tokenCounter;
-        // delete tradeCoinCommodity[_tokenId];
+        delete tradeCoinCommodity[_tokenId];
 
         emit SplitCommodity(_tokenId, msg.sender, newTokens);
     }
@@ -347,8 +357,6 @@ contract TradeCoinV4 is ERC721, RoleControl, ITradeCoin {
         override(ERC721, AccessControl)
         returns (bool)
     {
-        return
-            type(ITradeCoin).interfaceId == interfaceId ||
-            super.supportsInterface(interfaceId);
+        return super.supportsInterface(interfaceId);
     }
 }

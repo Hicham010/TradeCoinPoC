@@ -101,9 +101,7 @@ describe("Test the composition contract", function () {
         tradeCoinComposition
           .connect(owner)
           .createComposition("cashew mix", [0], tHandler.address)
-      ).to.be.revertedWith(
-        "You can't make a composition of less then 2 tokens"
-      );
+      ).to.be.revertedWith("Composition must be more than 2 tokens");
     });
 
     it("Should revert: create a composition of two cashew token by the wrong owner", async function () {
@@ -192,7 +190,7 @@ describe("Test the composition contract", function () {
 
       await expect(
         tradeCoinComposition.connect(owner).removeCommodityFromComposition(0, 1)
-      ).to.be.revertedWith("Can't remove token from composition");
+      ).to.be.revertedWith("Must contain at least 2 tokens");
     });
 
     it("Should revert: remove a token from the composition by wrong owner", async function () {
@@ -439,7 +437,12 @@ describe("Test the composition contract", function () {
     });
 
     it("supportsInterface function", async function () {
-      await expect(!tradeCoinComposition.supportsInterface("0xffffffff"));
+      expect(await !tradeCoinComposition.supportsInterface("0xffffffff"));
+    });
+
+    it("Should support the ITradeCoin interface", async function () {
+      expect(await tradeCoinComposition.supportsInterface("0x1c10033b")).to.be
+        .true;
     });
 
     it("getIdsOfCommoditiesfunction", async function () {

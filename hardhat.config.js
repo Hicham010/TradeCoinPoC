@@ -29,7 +29,7 @@ module.exports = {
         settings: {
           optimizer: {
             enabled: true,
-            runs: 9999999,
+            runs: 999999,
           },
         },
       },
@@ -73,9 +73,9 @@ module.exports = {
     coinmarketcap: process.env.COIN_MCAP_API_KEY,
     excludeContracts: [
       // "ComposableTC/TradeCoinTokenizerV2.sol",
-      //"ComposableTC/TradeCoinV4.sol",
+      // "ComposableTC/TradeCoinV4.sol",
       "ComposableTC/RoleControl.sol",
     ],
-    rst: true,
+    rst: false,
   },
 };
