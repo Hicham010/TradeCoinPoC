@@ -2,11 +2,11 @@
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TradeCoin.sol";
-import "../RoleControl.sol";
-import "../interfaces/ITradeCoinComposition.sol";
-import "../interfaces/ITradeCoin.sol";
+import "./RoleControl.sol";
+import "./interfaces/ITradeCoinComposition.sol";
+import "./interfaces/ITradeCoin.sol";
 
-contract TradeCoinCompositionV3 is ERC721, RoleControl, ITradeCoinComposition {
+contract TradeCoinCompositionV2 is ERC721, RoleControl, ITradeCoinComposition {
     uint256 public tokenCounter;
     TradeCoinV4 public tradeCoinV4;
 

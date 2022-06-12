@@ -2,7 +2,7 @@
 pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "../interfaces/ITradeCoinTokenizer.sol";
+import "./interfaces/ITradeCoinTokenizer.sol";
 
 contract TradeCoinTokenizerV2 is ERC721, ITradeCoinTokenizer {
     uint256 public tokenCounter;

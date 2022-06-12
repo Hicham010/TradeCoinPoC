@@ -2,8 +2,8 @@
 pragma solidity ^0.8.3;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "./TradeCoinTokenizerV2.sol";
-import "../RoleControl.sol";
-import "../interfaces/ITradeCoin.sol";
+import "./RoleControl.sol";
+import "./interfaces/ITradeCoin.sol";
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 

@@ -1,21 +1,21 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.3;
+pragma solidity 0.8.4;
 
 import "./TradeCoinV4.sol";
 
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 contract TradeCoinEscrow is ReentrancyGuard {
-    TradeCoinV4 public tradeCoinV4;
-    uint256 public tradeCoinTokenBalance;
-    uint256 public weiBalance;
-
     struct SaleQueue {
         address seller;
         address newOwner;
         uint256 priceInWei;
         bool isPayed;
     }
+
+    TradeCoinV4 public tradeCoinV4;
+    uint256 public tradeCoinTokenBalance;
+    uint256 public weiBalance;
 
     event InitializeSale(
         uint256 tradeCoinTokenID,
@@ -31,11 +31,11 @@ contract TradeCoinEscrow is ReentrancyGuard {
 
     event ReverseSale(uint256 tradeCoinTokenID, address aborter);
 
-    mapping(uint256 => SaleQueue) public pendingSales;
-
     constructor(address _tradeCoinV4) {
         tradeCoinV4 = TradeCoinV4(_tradeCoinV4);
     }
+
+    mapping(uint256 => SaleQueue) public pendingSales;
 
     function initializeSale(
         uint256 tradeCoinTokenID,

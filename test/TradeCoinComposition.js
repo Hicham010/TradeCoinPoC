@@ -30,7 +30,7 @@ beforeEach(async function () {
   await tradeCoin.deployed();
 
   TradeCoinComposition = await ethers.getContractFactory(
-    "TradeCoinCompositionV3"
+    "TradeCoinCompositionV2"
   );
   tradeCoinComposition = await TradeCoinComposition.deploy(tradeCoin.address);
   await tradeCoinComposition.deployed();
