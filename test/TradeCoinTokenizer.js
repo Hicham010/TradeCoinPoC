@@ -21,7 +21,7 @@ beforeEach(async function () {
   address0 = "0x0000000000000000000000000000000000000000";
 });
 
-describe("Testing the tokenization functions of the TradeCoinTokenizer", function () {
+describe("Testing the tokenizatihhon functions of the TradeCoinTokenizer", function () {
   describe("Test the tokenization functions", function () {
     it("Should tokenize 10kg of cashew", async function () {
       commodityTest = "cashew";

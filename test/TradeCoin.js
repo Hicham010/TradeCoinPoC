@@ -70,6 +70,7 @@ beforeEach(async function () {
   await tradeCoin.connect(admin).addAdmin(notApproved.address);
   await tradeCoin.connect(admin).removeAdmin(notApproved.address);
 });
+
 describe("Testing the tradecoin contract", function () {
   describe("Testing if all the tokens are minted and the roles assigned", function () {
     it("The cashew tokens should be minted in the tokenizer contract", async function () {

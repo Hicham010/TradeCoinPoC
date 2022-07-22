@@ -25,7 +25,7 @@ module.exports = {
   solidity: {
     compilers: [
       {
-        version: "0.8.4",
+        version: "0.8.5",
         settings: {
           optimizer: {
             enabled: true,
@@ -45,14 +45,18 @@ module.exports = {
     rinkeby: {
       url: "https://rinkeby.infura.io/v3/" + process.env.INFURA_API_KEY,
       // url: "https://eth-rinkeby.alchemyapi.io/v2/siqDv3HtS8Rfka5jHvor7MazpHj8KFgl",
-      accounts: [],
+      accounts: [
+        process.env.OWNER_PRIVATE_KEY,
+        process.env.FARMER_PRIVATE_KEY,
+        process.env.WAREHOUSE_PRIVATE_KEY,
+        process.env.TRANSPORTER_PRIVATE_KEY,
+        process.env.PROCESSOR_PRIVATE_KEY,
+      ],
     },
     arbitrum_rinkeby: {
       url:
         "https://arb-rinkeby.g.alchemy.com/v2/" + process.env.ALCHEMY_API_KEY,
-      accounts: [
-        "3e55d582544c0455712429a5d138f97224b359a907d66134ddcba08f69e1944a", // owner
-      ],
+      accounts: [process.env.OWNER_PRIVATE_KEY],
     },
     hardhat: {},
   },
@@ -67,7 +71,7 @@ module.exports = {
     coinmarketcap: process.env.COIN_MCAP_API_KEY,
     excludeContracts: [
       "ComposableTC/TradeCoinTokenizerV2.sol",
-      // "ComposableTC/TradeCoinV4.sol",
+      "ComposableTC/TradeCoinV4.sol",
       "ComposableTC/RoleControl.sol",
     ],
     rst: false,
