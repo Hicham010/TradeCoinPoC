@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@0xsequence/sstore2": "github:0xsequence/sstore2",
-    "@openzeppelin/contracts": "^4.5.0",
+    "@openzeppelin/contracts": "^4.7.1",
     "circom_tester": "^0.0.10",
     "circomlib": "^2.0.3",
     "circomlibjs": "^0.1.2",
